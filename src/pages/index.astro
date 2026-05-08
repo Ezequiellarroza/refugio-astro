@@ -1,0 +1,54 @@
+---
+import type { SEOProps } from '@/types/seo';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import ActividadesDestacadas from '@/components/sections/ActividadesDestacadas.astro';
+import LaDiferencia from '@/components/sections/LaDiferencia.astro';
+import Nosotros from '@/components/sections/Nosotros.astro';
+import ElLugar from '@/components/sections/ElLugar.astro';
+import Instalaciones from '@/components/sections/Instalaciones.astro';
+import Actividades from '@/components/sections/Actividades.astro';
+import EnglishCamp from '@/components/sections/EnglishCamp.astro';
+import CasitaAbeja from '@/components/sections/CasitaAbeja.astro';
+import Confianza from '@/components/sections/Confianza.astro';
+import Instituciones from '@/components/sections/Instituciones.astro';
+import FAQ from '@/components/sections/FAQ.astro';
+import Contacto from '@/components/sections/Contacto.astro';
+import {
+  SITE_NAME,
+  SITE_URL,
+  SITE_PUBLISHED_DATE,
+} from '@/lib/seo-defaults';
+
+const seo: SEOProps = {
+  title:
+    'Refugio del Valle — Espacio de co-creación e innovación en turismo para grupos | Tandil',
+  description:
+    'La base de viajes escolares más elegida de Buenos Aires. +120 instituciones, +10.000 alumnos por año en las sierras de Tandil.',
+  ogType: 'website',
+  schemas: [
+    {
+      '@type': 'WebPage',
+      name: SITE_NAME,
+      url: SITE_URL,
+      datePublished: SITE_PUBLISHED_DATE,
+    },
+  ],
+};
+---
+
+<BaseLayout seo={seo}>
+  <Hero />
+  <ActividadesDestacadas />
+  <LaDiferencia />
+  <Nosotros />
+  <ElLugar />
+  <Instalaciones />
+  <Actividades />
+  <EnglishCamp />
+  <CasitaAbeja />
+  <Confianza />
+  <Instituciones />
+  <FAQ />
+  <Contacto />
+</BaseLayout>

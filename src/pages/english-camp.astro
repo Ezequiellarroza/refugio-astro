@@ -1,0 +1,160 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import Button from '@/components/ui/Button.astro';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: 'English Immersion Camp — Refugio del Valle Tandil',
+  description: 'Campamento de inmersión en inglés de 3 días y 2 noches con counselors nativos en las sierras de Tandil. A cargo de Fase 2, líder en viajes educativos.',
+  ogImage: '/images/og/og-actividades.jpg',
+};
+---
+
+<PageLayout
+  seo={seo}
+  hero={{
+    eyebrow: 'Inmersión lingüística',
+    title: 'English Immersion Camp',
+    subtitle: 'Una experiencia educativa transformadora en pleno contacto con la naturaleza.',
+    backgroundImage: '/images/actividades/hero-actividades.jpg',
+    backgroundAlt: 'English Immersion Camp en Refugio del Valle',
+  }}
+>
+  {/* 1. Intro */}
+  <section class="bg-crema py-24">
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <SectionTitle
+        subtitle="El programa"
+        title="Una experiencia educativa transformadora"
+        align="center"
+      />
+
+      <p class="reveal mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-oscuro-suave/80">
+        En Refugio del Valle ofrecemos campamentos de inmersión en inglés diseñados para que los estudiantes vivan el idioma de manera natural y significativa. Durante 3 días y 2 noches, cada actividad —desde los juegos y deportes hasta los momentos de fogón— se desarrolla íntegramente en inglés, creando un entorno de aprendizaje auténtico y envolvente.
+      </p>
+    </div>
+  </section>
+
+  {/* 2. Counselors nativos */}
+  <section class="bg-piedra-clara py-24">
+    <div class="mx-auto max-w-4xl px-6">
+      <SectionTitle
+        subtitle="Counselors"
+        title="Una inmersión real con counselors nativos"
+        align="center"
+      />
+
+      <p class="reveal mx-auto mt-8 max-w-3xl text-center text-lg leading-relaxed text-oscuro-suave/80">
+        El programa está coordinado por counselors de habla inglesa nativa provenientes de distintos países, todos estudiantes y graduados que reciben un entrenamiento exhaustivo y específico. Esta inmersión garantiza que los participantes ejerciten sus conocimientos del idioma en situaciones reales, interactuando y construyendo confianza para expresarse en inglés más allá del aula.
+      </p>
+    </div>
+  </section>
+
+  {/* 3. Fase 2 — partner */}
+  <section class="bg-crema py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2">
+      <div>
+        <SectionTitle
+          subtitle="Partner educativo"
+          title="Más de 15 años de experiencia educativa"
+          align="left"
+        />
+
+        <p class="reveal mt-8 leading-relaxed text-oscuro-suave/80">
+          El English Immersion Camp está a cargo de <strong class="text-verde-bosque">Fase 2</strong>, la empresa líder en viajes educativos de Argentina, con una trayectoria de más de 15 años desarrollando experiencias pedagógicas de excelencia. Cada campamento se estructura en torno a un eje temático situado en un contexto histórico real o en un mundo de fantasía, integrando actividades lúdicas, culturales, sociales, deportivas y recreativas.
+        </p>
+      </div>
+
+      <div class="reveal flex items-center justify-center">
+        <img
+          src="/images/english-camp/logo-fase2.png"
+          alt="Fase 2 — Líder en viajes educativos"
+          class="max-h-64 w-auto object-contain"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* 4. Aprendizaje integral */}
+  <section class="bg-verde-bosque py-24">
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <SectionTitle
+        subtitle="Aprendizaje integral"
+        title="Habilidades que trascienden el idioma"
+        align="center"
+        light
+      />
+
+      <p class="reveal mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-white/80">
+        Rodeados de naturaleza y en un ambiente controlado, los estudiantes no solo fortalecen su dominio del inglés, sino también habilidades fundamentales como la autonomía, la comunicación efectiva y el trabajo en equipo. Es una oportunidad única para que los alumnos descubran sus capacidades en un contexto diferente al escolar.
+      </p>
+    </div>
+  </section>
+
+  {/* 5. Acompañamiento docente */}
+  <section class="bg-piedra-clara py-24">
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <SectionTitle
+        subtitle="Acompañamiento"
+        title="Material y guía para docentes"
+        align="center"
+      />
+
+      <p class="reveal mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-oscuro-suave/80">
+        Previo al viaje, brindamos material completo con instrucciones y sugerencias para docentes y alumnos, optimizando así la experiencia y facilitando la integración del campamento con los objetivos pedagógicos de cada institución.
+      </p>
+    </div>
+  </section>
+
+  {/* 6. Información práctica — ficha */}
+  <section class="bg-crema py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="Información práctica"
+        title="Datos del programa"
+        align="center"
+      />
+
+      <div class="mx-auto mt-16 grid max-w-3xl gap-8 sm:grid-cols-3">
+        <div class="reveal stagger-1 text-center">
+          <span class="font-display text-5xl font-bold text-verde-bosque">3</span>
+          <p class="mt-1 text-sm font-medium uppercase tracking-wide text-verde-sierra">días y 2 noches</p>
+          <p class="mt-1 text-sm text-oscuro-suave/60">Duración del programa</p>
+        </div>
+        <div class="reveal stagger-2 text-center">
+          <span class="font-display text-5xl font-bold text-verde-bosque">Limitados</span>
+          <p class="mt-1 text-sm font-medium uppercase tracking-wide text-verde-sierra">Cupos</p>
+          <p class="mt-1 text-sm text-oscuro-suave/60">Por temporada</p>
+        </div>
+        <div class="reveal stagger-3 text-center">
+          <span class="font-display text-5xl font-bold text-verde-bosque">Abierta</span>
+          <p class="mt-1 text-sm font-medium uppercase tracking-wide text-verde-sierra">Inscripción</p>
+          <p class="mt-1 text-sm text-oscuro-suave/60">Próxima temporada</p>
+        </div>
+      </div>
+
+      <p class="reveal mx-auto mt-12 max-w-2xl text-center leading-relaxed text-oscuro-suave/80">
+        Invitamos a colegios e institutos de inglés a sumarse a esta experiencia transformadora. Contactanos para reservar fecha o recibir el programa completo.
+      </p>
+    </div>
+  </section>
+
+  {/* 7. Cita destacada + CTA final */}
+  <section class="bg-verde-sierra py-24">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <p class="reveal mb-10 font-display text-2xl italic leading-snug text-ambar-claro md:text-3xl">
+        Refugio del Valle — donde el aprendizaje del inglés se convierte en experiencia.
+      </p>
+      <h2 class="reveal mb-6 font-display text-4xl font-bold text-white md:text-5xl">
+        ¿Listos para vivir estas experiencias?
+      </h2>
+      <p class="reveal stagger-1 mb-10 text-lg text-white/80">
+        Contanos sobre tu institución y armamos una propuesta a medida.
+      </p>
+      <Button href="/contacto" variant="white" size="lg">
+        Hablemos de tu grupo
+      </Button>
+    </div>
+  </section>
+</PageLayout>

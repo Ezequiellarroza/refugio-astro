@@ -1,0 +1,104 @@
+---
+/**
+ * Componente <SEO />
+ *
+ * Renderiza todos los meta tags, Open Graph, Twitter Cards,
+ * canónica y schemas JSON-LD de una página.
+ *
+ * Uso (desde BaseLayout):
+ *   <SEO seo={Astro.props.seo} />
+ *
+ * Defaults aplicados desde src/lib/seo-defaults.ts cuando
+ * la página no declara un campo opcional.
+ */
+
+import type { SEOProps, SchemaConfig } from '@/types/seo';
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_LOCALE,
+  DEFAULT_OG_IMAGE,
+  TWITTER_CARD_TYPE,
+  DEFAULT_OG_TYPE,
+} from '@/lib/seo-defaults';
+
+interface Props {
+  seo: SEOProps;
+}
+
+const { seo } = Astro.props;
+
+// ============================================================
+// Resolución de valores con defaults
+// ============================================================
+
+const title = seo.title;
+const description = seo.description;
+
+// Canónica: si la página no la declara, se calcula desde el path actual.
+// Garantiza https://www.refugiodelvalletandil.com.ar incluso en dev local.
+const canonical = seo.canonical
+  ?? new URL(Astro.url.pathname, SITE_URL).toString();
+
+// OG image: path absoluto resuelto contra SITE_URL.
+const ogImagePath = seo.ogImage ?? DEFAULT_OG_IMAGE;
+const ogImage = new URL(ogImagePath, SITE_URL).toString();
+
+const ogType = seo.ogType ?? DEFAULT_OG_TYPE;
+const noindex = seo.noindex ?? false;
+const keywords = seo.keywords;
+const schemas = seo.schemas;
+
+// ============================================================
+// Schemas JSON-LD: un solo script con array @graph
+// ============================================================
+
+let schemaJsonLd: string | null = null;
+
+if (schemas && schemas.length > 0) {
+  // Cada schema necesita @context. Lo agregamos al wrapper @graph.
+  const graphPayload = {
+    '@context': 'https://schema.org',
+    '@graph': schemas.map((s: SchemaConfig) => {
+      // Devolvemos el schema tal cual; @context va en el wrapper.
+      return s;
+    }),
+  };
+  schemaJsonLd = JSON.stringify(graphPayload);
+}
+---
+
+{/* Title y description (obligatorios) */}
+<title>{title}</title>
+<meta name="description" content={description} />
+
+{/* Keywords (opcional) */}
+{keywords && keywords.length > 0 && (
+  <meta name="keywords" content={keywords.join(', ')} />
+)}
+
+{/* Robots: noindex si la página lo pide */}
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+{/* Canónica */}
+<link rel="canonical" href={canonical} />
+
+{/* Open Graph */}
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content={SITE_LOCALE} />
+
+{/* Twitter Cards */}
+<meta name="twitter:card" content={TWITTER_CARD_TYPE} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{/* Schemas JSON-LD (si la página los declara) */}
+{schemaJsonLd && (
+  <script is:inline type="application/ld+json" set:html={schemaJsonLd} />
+)}

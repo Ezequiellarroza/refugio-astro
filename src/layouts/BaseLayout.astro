@@ -1,0 +1,77 @@
+---
+/**
+ * BaseLayout.astro
+ *
+ * Layout raíz que envuelve todas las páginas del sitio.
+ *
+ * Responsabilidades:
+ * - Estructura HTML completa con lang="es-AR".
+ * - <head> con meta tags base, favicons, theme-color, y componente <SEO />.
+ * - Importa los estilos globales una única vez en todo el proyecto.
+ * - <body> con placeholders para Navbar/Footer/WhatsAppButton y <slot />.
+ *
+ * Uso desde una página:
+ *
+ *   ---
+ *   import BaseLayout from '@/layouts/BaseLayout.astro';
+ *   import type { SEOProps } from '@/types/seo';
+ *
+ *   const seo: SEOProps = {
+ *     title: '...',
+ *     description: '...',
+ *   };
+ *   ---
+ *   <BaseLayout seo={seo}>
+ *     contenido de la página
+ *   </BaseLayout>
+ */
+
+import type { SEOProps } from '@/types/seo';
+import SEO from '@/components/seo/SEO.astro';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer.astro';
+import WhatsAppButton from '@/components/layout/WhatsAppButton.astro';
+import '@/styles/global.css';
+
+interface Props {
+  seo: SEOProps;
+}
+
+const { seo } = Astro.props;
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    {/* Meta tags base */}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    {/* Favicons (preservados del WordPress original) */}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="msapplication-TileImage" content="/mstile-270x270.png" />
+
+    {/* Color institucional (verde-bosque) usado por navegadores móviles */}
+    <meta name="theme-color" content="#1a3c2a" />
+
+    {/* SEO: meta tags, Open Graph, Twitter Cards, canónica, schemas JSON-LD */}
+    <SEO seo={seo} />
+  </head>
+
+  <body>
+    <Navbar pathname={pathname} client:load />
+
+    <slot />
+
+    <Footer />
+    <WhatsAppButton />
+
+    <script>
+      import '@/scripts/scroll-reveal';
+    </script>
+  </body>
+</html>

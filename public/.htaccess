@@ -1,0 +1,51 @@
+# ============================================
+# Refugio del Valle - .htaccess
+# ============================================
+
+RewriteEngine On
+
+# --------------------------------------------
+# 1. Excepción para certificado SSL (Let's Encrypt)
+# --------------------------------------------
+RewriteRule ^\.well-known/ - [L]
+
+# --------------------------------------------
+# 2. Forzar HTTPS
+# --------------------------------------------
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# --------------------------------------------
+# 3. Redirigir dominio alternativo refugiodelvalle.ar
+# --------------------------------------------
+RewriteCond %{HTTP_HOST} ^(www\.)?refugiodelvalle\.ar$ [NC]
+RewriteRule ^(.*)$ https://www.refugiodelvalletandil.com.ar/$1 [R=301,L]
+
+# --------------------------------------------
+# 4. Forzar www (canónica oficial)
+# --------------------------------------------
+RewriteCond %{HTTP_HOST} ^refugiodelvalletandil\.com\.ar$ [NC]
+RewriteRule ^(.*)$ https://www.refugiodelvalletandil.com.ar/$1 [R=301,L]
+
+# --------------------------------------------
+# 5. Redirects 301 - URLs viejas WordPress
+# (Las URLs /actividades/ y /contacto/ no necesitan redirect:
+# son iguales en el sitio nuevo y Apache las resuelve solo)
+# --------------------------------------------
+RedirectMatch 301 ^/lugar/?$                                  https://www.refugiodelvalletandil.com.ar/el-lugar
+RedirectMatch 301 ^/que-hay-de-nosotros/?$                    https://www.refugiodelvalletandil.com.ar/nosotros
+RedirectMatch 301 ^/accesibilidad/?$                          https://www.refugiodelvalletandil.com.ar/
+RedirectMatch 301 ^/preguntas-frecuentes/?$                   https://www.refugiodelvalletandil.com.ar/faq
+RedirectMatch 301 ^/para-empezar/?$                           https://www.refugiodelvalletandil.com.ar/
+RedirectMatch 301 ^/visita-360/?$                             https://www.refugiodelvalletandil.com.ar/el-lugar
+RedirectMatch 301 ^/vista-360/?$                              https://www.refugiodelvalletandil.com.ar/el-lugar
+RedirectMatch 301 ^/mirador-3d/?$                             https://www.refugiodelvalletandil.com.ar/el-lugar
+RedirectMatch 301 ^/english-immersion-camp/?$                 https://www.refugiodelvalletandil.com.ar/english-camp
+RedirectMatch 301 ^/area-cardio-protegida/?$                  https://www.refugiodelvalletandil.com.ar/
+RedirectMatch 301 ^/la-casa-de-la-abejita/?$                  https://www.refugiodelvalletandil.com.ar/
+RedirectMatch 301 ^/instituciones-que-confian-en-nosotros/?$  https://www.refugiodelvalletandil.com.ar/
+
+# --------------------------------------------
+# 6. Página 404
+# --------------------------------------------
+ErrorDocument 404 /404.html

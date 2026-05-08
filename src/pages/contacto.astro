@@ -1,0 +1,24 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Contacto from '@/components/sections/Contacto.astro';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: 'Contacto — Refugio del Valle Tandil',
+  description: 'Coordiná la visita de tu institución a Refugio del Valle. Te respondemos en menos de 24hs hábiles. WhatsApp, formulario y datos del predio.',
+  ogImage: '/images/og/og-contacto.jpg',
+};
+---
+
+<PageLayout
+  seo={seo}
+  hero={{
+    eyebrow: 'Hablemos',
+    title: 'Estamos para tu próximo proyecto',
+    subtitle: 'Contanos sobre tu grupo y armamos una propuesta a medida.',
+    backgroundImage: '/images/el-lugar/lugar-panoramica.jpg',
+    backgroundAlt: 'Predio Refugio del Valle',
+  }}
+>
+  <Contacto />
+</PageLayout>

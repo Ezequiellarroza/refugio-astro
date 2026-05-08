@@ -1,0 +1,38 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import FAQ from '@/components/sections/FAQ.astro';
+import faq from '@/data/faq';
+import type { SEOProps, FAQPageSchema } from '@/types/seo';
+
+const faqSchema: FAQPageSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+const seo: SEOProps = {
+  title: 'Preguntas frecuentes — Refugio del Valle Tandil',
+  description: 'Resolvemos las dudas más frecuentes sobre alojamiento, actividades, capacidad, comidas y logística para grupos institucionales en Refugio del Valle.',
+  ogImage: '/images/og/og-home.jpg',
+  schemas: [faqSchema],
+};
+---
+
+<PageLayout
+  seo={seo}
+  hero={{
+    eyebrow: 'Información práctica',
+    title: 'Preguntas frecuentes',
+    subtitle: 'Resolvemos las dudas más comunes sobre nuestra propuesta institucional.',
+    backgroundImage: '/images/nosotros/hero.jpg',
+    backgroundAlt: 'Refugio del Valle',
+  }}
+>
+  <FAQ />
+</PageLayout>

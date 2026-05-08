@@ -1,0 +1,243 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import Button from '@/components/ui/Button.astro';
+import { MapPin, Trees, Binoculars, Droplets, Leaf } from 'lucide-react';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: 'El Lugar — Refugio del Valle Tandil',
+  description: 'Predio en las sierras de Tandil con capacidad para 230 huéspedes. Ubicación estratégica, sustentabilidad certificada y entorno natural diseñado para grupos.',
+  ogImage: '/images/og/og-lugar.jpg',
+};
+
+const stats = [
+  { value: '360', unit: 'km', detail: 'De la Ciudad de Buenos Aires' },
+  { value: '230', unit: 'huéspedes', detail: 'Capacidad máxima del predio' },
+  { value: '+80', unit: 'instituciones', detail: 'Recibidas en el predio' },
+];
+
+const sustentabilidad = [
+  {
+    icon: Binoculars,
+    title: 'Puntos de Observación',
+    description: 'Miradores estratégicamente ubicados para la contemplación y el análisis del valle y la ciudad.',
+  },
+  {
+    icon: Trees,
+    title: 'Gestión del Paisaje',
+    description: 'Montes de pinos y eucaliptos que proporcionan zonas de baja densidad sonora, ideales para dinámicas de integración y liderazgo.',
+  },
+];
+
+const highlights = [
+  {
+    icon: Trees,
+    title: 'Senderos y Ciervos',
+    description: 'Recorré senderos naturales entre sierras y bosques, con ciervos y llamas en libertad.',
+    image: '/images/el-lugar/highlight-senderos.jpg',
+  },
+  {
+    icon: Binoculars,
+    title: 'Miradores Naturales',
+    description: 'Puntos panorámicos con vistas a las sierras de Tandil y el valle.',
+    image: '/images/el-lugar/highlight-miradores.jpg',
+  },
+  {
+    icon: Droplets,
+    title: 'Arroyo y Cantera',
+    description: 'Arroyo natural y cantera centenaria integrados al paisaje del predio.',
+    image: '/images/el-lugar/highlight-arroyo.jpg',
+  },
+  {
+    icon: MapPin,
+    title: 'Ubicación Estratégica',
+    description: 'Cereseto 2197, Tandil. Acceso directo desde ruta, cerca de la ciudad.',
+    image: '/images/el-lugar/highlight-ubicacion.jpg',
+  },
+];
+---
+
+<PageLayout
+  seo={seo}
+  hero={{
+    eyebrow: 'El entorno',
+    title: 'El entorno natural de Tandil, a tu servicio',
+    subtitle: 'Un activo estratégico en Tandil diseñado para la excelencia institucional.',
+    backgroundImage: '/images/el-lugar/lugar-panoramica.jpg',
+    backgroundAlt: 'Predio Refugio del Valle',
+  }}
+>
+  {/* 2. Ubicación y Stats */}
+  <section class="bg-crema py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="Ubicación"
+        title="En el corazón del sistema serrano de Tandilia"
+        align="center"
+      />
+
+      <p class="reveal mx-auto mt-6 mb-16 max-w-3xl text-center leading-relaxed text-oscuro-suave/80">
+        Situado a solo 360 km de la Ciudad de Buenos Aires, nuestro predio ofrece un microclima templado que permite la ejecución de proyectos institucionales durante los doce meses del año. Ubicados en una ladera exclusiva al sudoeste de la ciudad, garantizamos un equilibrio perfecto entre la proximidad urbana y la privacidad absoluta.
+      </p>
+
+      <div class="mx-auto mt-16 grid max-w-3xl gap-8 sm:grid-cols-3">
+        {stats.map((stat, i) => (
+          <div class:list={['reveal', `stagger-${i + 1}`, 'text-center']}>
+            <span class="font-display text-5xl font-bold text-verde-bosque">
+              {stat.value}
+            </span>
+            <p class="mt-1 text-sm font-medium uppercase tracking-wide text-verde-sierra">
+              {stat.unit}
+            </p>
+            <p class="mt-1 text-sm text-oscuro-suave/60">
+              {stat.detail}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* 4. Sustentabilidad */}
+  <section class="bg-verde-bosque py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="Sustentabilidad"
+        title="Un compromiso con la idoneidad y el entorno"
+        align="center"
+        light
+      />
+
+      <div class="reveal mt-6 mb-16 flex items-center justify-center gap-3">
+        <div class="inline-flex items-center gap-3 rounded-full border border-ambar/30 bg-ambar/20 px-6 py-3">
+          <Leaf className="h-5 w-5 text-ambar" />
+          <span class="text-sm font-medium tracking-wide text-ambar-claro">
+            Certificados en Medición de Huella de Carbono
+          </span>
+        </div>
+      </div>
+
+      <div class="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
+        {sustentabilidad.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <div class:list={[
+              'reveal',
+              `stagger-${i + 1}`,
+              'rounded-2xl border border-white/10 bg-white/5 p-8 transition-colors duration-300 hover:bg-white/10'
+            ]}>
+              <Icon className="mb-6 h-10 w-10 text-ambar" />
+              <h3 class="mb-3 font-display text-xl font-semibold text-white">
+                {item.title}
+              </h3>
+              <p class="text-sm leading-relaxed text-white/65">
+                {item.description}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  {/* 5. Previsibilidad */}
+  <section class="bg-piedra-clara py-24">
+    <div class="mx-auto max-w-4xl px-6">
+      <SectionTitle
+        subtitle="Previsibilidad"
+        title="El entorno como aliado del éxito pedagógico"
+        align="center"
+      />
+
+      <p class="reveal mx-auto mt-6 max-w-2xl text-center leading-relaxed text-oscuro-suave/80">
+        Entendemos que el entorno natural debe ser un aliado del éxito pedagógico, no un factor de riesgo. Nuestra infraestructura permite una vivencia integral bajo una supervisión técnica constante que solo quienes habitamos y gestionamos el lugar desde hace más de dos décadas podemos ofrecer.
+      </p>
+
+      <div class="reveal stagger-2 mx-auto mt-12 max-w-2xl border-l-4 border-ambar pl-8 text-left">
+        <p class="font-display text-2xl italic leading-snug text-oscuro md:text-3xl">
+          La co-creación de experiencias se sustenta en la transparencia de nuestra gestión y en la calidad técnica de nuestra infraestructura natural.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* 6. Highlights */}
+  <section class="bg-crema py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="El predio"
+        title="Todo lo que el entorno ofrece"
+        align="center"
+      />
+
+      <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {highlights.map(({ icon: Icon, title, description, image }, i) => (
+          <div class:list={[
+            'reveal',
+            `stagger-${Math.min(i + 1, 6)}`,
+            'overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow duration-300 hover:shadow-md'
+          ]}>
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={image}
+                alt={title}
+                class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </div>
+            <div class="p-6">
+              <div class="mb-3 flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-verde-sierra/10 text-verde-sierra">
+                  <Icon size={22} />
+                </div>
+                <h3 class="font-display text-lg font-semibold text-verde-bosque">
+                  {title}
+                </h3>
+              </div>
+              <p class="text-sm leading-relaxed text-oscuro-suave/70">
+                {description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* 7. Tour 360° */}
+  <section class="bg-piedra-clara py-12">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="Recorrido virtual"
+        title="Conocé el predio desde donde estés"
+        align="center"
+      />
+
+      <div class="reveal mt-12 overflow-hidden rounded-2xl">
+        <iframe
+          src="https://espacios360.com.ar/refugio"
+          height="520"
+          width="100%"
+          style="border: none; display: block;"
+          title="Tour 360° Refugio del Valle"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  {/* 8. CTA */}
+  <section class="bg-verde-sierra py-24">
+    <div class="mx-auto max-w-2xl px-6 text-center">
+      <h2 class="reveal mb-6 font-display text-4xl font-bold text-white md:text-5xl">
+        Diseñe una estancia con propósito
+      </h2>
+      <p class="reveal stagger-1 mb-10 text-lg text-white/80">
+        Asegure para su institución un espacio donde el profesionalismo operativo se encuentra con la serenidad de las sierras de Tandil.
+      </p>
+      <Button href="/contacto" variant="white" size="lg">
+        Hablemos de tu grupo
+      </Button>
+    </div>
+  </section>
+</PageLayout>

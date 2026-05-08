@@ -1,0 +1,67 @@
+---
+import Button from '@/components/ui/Button.astro';
+
+interface Card {
+  video: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  buttonLabel: string;
+  buttonHref: string;
+}
+
+const CARDS: Card[] = [
+  {
+    video: '/videos/parque-aereo.mp4',
+    title: 'Parque Aéreo',
+    subtitle: 'Una aventura de superación personal',
+    description:
+      '7 tirolesas y 21 puentes colgantes con seguridad certificada bajo normas europeas. Operación exclusiva para contingentes escolares, sin traslados, con equipamiento CouDou Pro® francés.',
+    buttonLabel: 'Conocé el Parque',
+    buttonHref: '/parque-aereo',
+  },
+  {
+    video: '/videos/english-camp.mp4',
+    title: 'English Camp',
+    subtitle: 'El idioma como experiencia',
+    description:
+      '3 días y 2 noches de inmersión total en inglés, con counselors nativos y más de 15 años de experiencia educativa. A cargo de Fase 2, líder en viajes educativos de Argentina.',
+    buttonLabel: 'Conocé el Camp',
+    buttonHref: '/english-camp',
+  },
+];
+---
+
+<section class="flex flex-col md:flex-row w-full">
+  {
+    CARDS.map((card) => (
+      <div class="group relative overflow-hidden h-[50vh] md:h-[70vh] w-full md:w-1/2">
+        <video
+          src={card.video}
+          autoplay
+          muted
+          loop
+          playsinline
+          class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+
+        <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
+
+        <div class="relative z-10 flex h-full flex-col justify-end p-8">
+          <span class="mb-2 text-sm font-medium uppercase tracking-widest text-ambar-claro">
+            {card.subtitle}
+          </span>
+          <h3 class="font-display text-3xl font-bold text-white md:text-4xl">
+            {card.title}
+          </h3>
+          <p class="mt-3 max-w-sm text-white/80">{card.description}</p>
+          <div class="mt-5">
+            <Button variant="white" size="sm" href={card.buttonHref}>
+              {card.buttonLabel}
+            </Button>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</section>

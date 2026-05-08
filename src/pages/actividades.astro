@@ -1,0 +1,249 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import Button from '@/components/ui/Button.astro';
+import actividades from '@/data/actividades';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: 'Actividades — Refugio del Valle Tandil',
+  description: '14 actividades diseñadas para grupos: trekking, parque aéreo, arquería, astronomía y más. Experiencias institucionales en las sierras de Tandil.',
+  ogImage: '/images/og/og-actividades.jpg',
+};
+---
+
+<PageLayout
+  seo={seo}
+  hero={{
+    eyebrow: 'Desde 2001',
+    title: 'Un espacio pensado para grupos',
+    subtitle: 'Naturaleza, dinámicas y trayectoria en el corazón de Tandil',
+    backgroundImage: '/images/actividades/hero-actividades.jpg',
+    backgroundAlt: 'Actividades en Refugio del Valle',
+  }}
+>
+  {/* 2. Intro */}
+  <section class="bg-crema py-20">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="Experiencias"
+        title="14 actividades diseñadas para grupos"
+        align="center"
+      />
+
+      <p class="reveal mx-auto mt-6 max-w-2xl text-center text-lg leading-relaxed text-oscuro-suave/80">
+        Utilizamos el entorno como una herramienta operativa para fortalecer la cohesión y el liderazgo.
+      </p>
+
+      <blockquote class="reveal mx-auto mt-8 max-w-2xl border-l-4 border-ambar pl-8">
+        <p class="font-display text-xl italic leading-relaxed text-verde-bosque md:text-2xl">
+          Cada actividad tiene un propósito claro: fortalecer el grupo, generar confianza y crear una experiencia que el contingente recuerde.
+        </p>
+      </blockquote>
+    </div>
+  </section>
+
+  {/* 3. Grid de cards */}
+  <section class="bg-piedra-clara py-20">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="El programa"
+        title="Qué hacemos en Refugio del Valle"
+        align="center"
+      />
+
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {actividades.map((actividad, i) => (
+          <div class:list={[
+            'reveal',
+            `stagger-${Math.min((i % 6) + 1, 6)}`,
+            'flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow duration-300 hover:shadow-md'
+          ]}>
+            <div class="aspect-[4/3] overflow-hidden bg-verde-musgo/20">
+              <img
+                src={`/images/actividades/${actividad.id}.jpg`}
+                alt={actividad.titulo}
+                class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </div>
+
+            <div class="flex flex-1 flex-col p-6">
+              <span class="mb-3 block text-xs font-medium uppercase tracking-widest text-ambar">
+                {actividad.atributo}
+              </span>
+              <h3 class="mb-2 font-display text-xl leading-snug text-verde-bosque">
+                {actividad.titulo}
+              </h3>
+              <p class="flex-1 text-sm leading-relaxed text-oscuro-suave">
+                {actividad.descripcionBreve}
+              </p>
+              <button
+                type="button"
+                data-actividad-id={actividad.id}
+                class="actividad-trigger group mt-5 flex items-center gap-1 self-start text-sm font-medium text-verde-sierra transition-colors duration-200 hover:text-verde-bosque"
+              >
+                Ver más
+                <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* 4. CTA final */}
+  <section class="bg-verde-sierra py-20 text-center">
+    <div class="mx-auto max-w-4xl px-6">
+      <h2 class="font-display text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+        ¿Querés armar un programa para tu grupo?
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-white/80">
+        Trabajamos con colegios, viajes de egresados y grupos institucionales. Contanos qué necesitás y armamos una propuesta a medida.
+      </p>
+      <div class="mt-8">
+        <Button variant="white" href="/contacto" size="lg">
+          Hablemos de tu grupo
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  {/* Modal — oculto por default, se muestra al click en "Ver más" */}
+  <div
+    id="actividad-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-oscuro/60 p-4"
+    hidden
+  >
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-titulo"
+      id="actividad-modal-content"
+      class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white"
+    >
+      {/* Header */}
+      <div class="relative rounded-t-2xl bg-verde-bosque p-8">
+        <button
+          type="button"
+          id="actividad-modal-close"
+          class="absolute right-4 top-4 text-white/60 transition-colors hover:text-white"
+          aria-label="Cerrar"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+        <span id="modal-atributo" class="mb-3 block text-xs font-medium uppercase tracking-widest text-ambar-claro"></span>
+        <h2 id="modal-titulo" class="font-display text-2xl leading-snug text-white"></h2>
+      </div>
+
+      {/* Body */}
+      <div class="p-8">
+        <h4 class="mb-4 text-xs font-medium uppercase tracking-widest text-verde-musgo">
+          Ficha Operativa
+        </h4>
+        <table class="mb-8 w-full border-collapse text-sm">
+          <tbody id="modal-ficha"></tbody>
+        </table>
+
+        <h4 class="mb-4 text-xs font-medium uppercase tracking-widest text-verde-musgo">
+          Gestión de la Dinámica
+        </h4>
+        <div id="modal-contenido" class="space-y-4"></div>
+
+        <div class="mt-8 border-t border-piedra-clara pt-6">
+          <Button variant="primary" href="/contacto" class="w-full text-center">
+            Hablemos de tu grupo
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Datos de actividades serializados para el script */}
+  <script is:inline type="application/json" id="actividades-data" set:html={JSON.stringify(actividades)} />
+
+  <script>
+    interface ContenidoModalItem { subtitulo: string; descripcion: string; }
+    interface FichaOperativaItem { label: string; valor: string; }
+    interface Actividad {
+      id: string;
+      titulo: string;
+      atributo: string;
+      descripcionBreve: string;
+      fichaOperativa: FichaOperativaItem[];
+      contenidoModal: ContenidoModalItem[];
+    }
+
+    const dataEl = document.getElementById('actividades-data');
+    const actividadesData: Actividad[] = dataEl ? JSON.parse(dataEl.textContent || '[]') : [];
+
+    const modal = document.getElementById('actividad-modal') as HTMLDivElement | null;
+    const closeBtn = document.getElementById('actividad-modal-close') as HTMLButtonElement | null;
+    const tituloEl = document.getElementById('modal-titulo');
+    const atributoEl = document.getElementById('modal-atributo');
+    const fichaEl = document.getElementById('modal-ficha');
+    const contenidoEl = document.getElementById('modal-contenido');
+
+    function abrirModal(id: string) {
+      const actividad = actividadesData.find((a) => a.id === id);
+      if (!actividad || !modal || !tituloEl || !atributoEl || !fichaEl || !contenidoEl) return;
+
+      tituloEl.textContent = actividad.titulo;
+      atributoEl.textContent = actividad.atributo;
+
+      fichaEl.innerHTML = actividad.fichaOperativa
+        .map(
+          (fila, i) => `
+            <tr class="${i % 2 === 0 ? 'bg-piedra-clara/50' : ''}">
+              <td class="w-2/5 px-3 py-2 font-medium text-verde-bosque">${fila.label}</td>
+              <td class="px-3 py-2 text-oscuro-suave">${fila.valor}</td>
+            </tr>
+          `
+        )
+        .join('');
+
+      contenidoEl.innerHTML = actividad.contenidoModal
+        .map(
+          (punto) => `
+            <div class="flex gap-3">
+              <div class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ambar"></div>
+              <div>
+                <span class="text-sm font-medium text-verde-bosque">${punto.subtitulo}: </span>
+                <span class="text-sm text-oscuro-suave">${punto.descripcion}</span>
+              </div>
+            </div>
+          `
+        )
+        .join('');
+
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarModal() {
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.actividad-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.actividadId;
+        if (id) abrirModal(id);
+      });
+    });
+
+    closeBtn?.addEventListener('click', cerrarModal);
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) cerrarModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.hidden) cerrarModal();
+    });
+  </script>
+</PageLayout>

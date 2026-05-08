@@ -1,0 +1,67 @@
+---
+type Align = 'center' | 'left' | 'right';
+
+interface Props {
+  subtitle?: string;
+  title?: string;
+  description?: string;
+  align?: Align;
+  light?: boolean;
+  amber?: boolean;
+}
+
+const {
+  subtitle,
+  title,
+  description,
+  align = 'center',
+  light = false,
+  amber = false,
+} = Astro.props;
+
+const alignments: Record<Align, string> = {
+  center: 'text-center items-center',
+  left: 'text-left items-start',
+  right: 'text-right items-end',
+};
+---
+
+<div class={`flex flex-col gap-4 ${alignments[align]}`}>
+  {
+    subtitle && (
+      <span
+        class={`reveal text-sm font-body font-medium uppercase tracking-widest ${
+          light ? 'text-ambar-claro' : amber ? 'text-verde-bosque' : 'text-ambar'
+        }`}
+      >
+        {subtitle}
+      </span>
+    )
+  }
+
+  {
+    title && (
+      <h2
+        class={`reveal font-display text-3xl font-bold md:text-4xl lg:text-5xl ${
+          light ? 'text-white' : 'text-verde-bosque'
+        }`}
+      >
+        {title}
+      </h2>
+    )
+  }
+
+  <div class={`reveal h-1 w-16 rounded-full ${amber ? 'bg-verde-bosque' : 'bg-ambar'}`}></div>
+
+  {
+    description && (
+      <p
+        class={`reveal max-w-2xl text-lg leading-relaxed ${
+          light ? 'text-piedra-clara' : 'text-oscuro-suave/80'
+        }`}
+      >
+        {description}
+      </p>
+    )
+  }
+</div>

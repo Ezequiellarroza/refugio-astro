@@ -1,0 +1,120 @@
+---
+import { MapPin, Trees, Binoculars, Droplets } from 'lucide-react';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+
+interface Stat {
+  value: string;
+  unit: string;
+  detail: string;
+}
+
+const stats: Stat[] = [
+  { value: '230', unit: 'huéspedes', detail: 'Capacidad máxima' },
+  { value: '+25', unit: 'años', detail: 'Desde 2001 en Valle de los Ciervos' },
+  { value: '+120', unit: 'instituciones', detail: 'Recibidas en el predio' },
+];
+
+const highlights = [
+  {
+    icon: Trees,
+    title: 'Senderos y Ciervos',
+    description:
+      'Recorré senderos naturales entre sierras y bosques, con ciervos y llamas en libertad.',
+  },
+  {
+    icon: Binoculars,
+    title: 'Miradores Naturales',
+    description:
+      'Puntos panorámicos con vistas a las sierras de Tandil y el valle.',
+  },
+  {
+    icon: Droplets,
+    title: 'Arroyo y Cantera',
+    description:
+      'Arroyo natural y cantera centenaria integrados al paisaje del predio.',
+  },
+  {
+    icon: MapPin,
+    title: 'Ubicación Estratégica',
+    description:
+      'Cereseto 2197, Tandil. Acceso directo desde ruta, cerca de la ciudad.',
+  },
+];
+---
+
+<section class="bg-piedra-clara py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <SectionTitle
+      subtitle="El lugar"
+      title="30 hectáreas entre sierras"
+      description="Un predio único en las sierras de Tandil, donde la naturaleza y las instalaciones se combinan para crear experiencias inolvidables."
+    />
+
+    <div class="mt-16 grid gap-8 sm:grid-cols-3">
+      {
+        stats.map((stat) => (
+          <div class="reveal text-center">
+            <span class="font-display text-5xl font-bold text-verde-bosque">
+              {stat.value}
+            </span>
+            <p class="mt-1 text-sm font-medium uppercase tracking-wide text-verde-sierra">
+              {stat.unit}
+            </p>
+            <p class="mt-1 text-sm text-oscuro-suave/60">{stat.detail}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 grid gap-4 md:grid-cols-3">
+      <div class="reveal md:col-span-2">
+        <img
+          src="/images/el-lugar/lugar-panoramica.jpg"
+          alt="Vista panorámica del predio Refugio del Valle"
+          class="h-72 w-full object-cover rounded-2xl md:h-96"
+        />
+      </div>
+      <div class="reveal flex flex-col gap-4">
+        <img
+          src="/images/el-lugar/lugar-sierras.jpg"
+          alt="Sierras de Tandil desde el predio"
+          class="w-full flex-1 object-cover rounded-2xl"
+        />
+        <img
+          src="/images/el-lugar/lugar-ciervos.jpg"
+          alt="Ciervos y llamas en el predio"
+          class="w-full flex-1 object-cover rounded-2xl"
+        />
+      </div>
+    </div>
+
+    <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        highlights.map(({ icon: Icon, title, description }, i) => (
+          <div class={`reveal stagger-${Math.min(i + 1, 6)} text-center`}>
+            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-verde-sierra/10 text-verde-sierra">
+              <Icon size={28} />
+            </div>
+            <h3 class="font-display text-lg font-semibold text-verde-bosque">
+              {title}
+            </h3>
+            <p class="mt-2 text-sm text-oscuro-suave/70">{description}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-16 overflow-hidden rounded-2xl">
+      <iframe
+        src="https://espacios360.com.ar/refugio"
+        height="520"
+        width="100%"
+        style="border: none; display: block;"
+        title="Tour 360° Refugio del Valle"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>

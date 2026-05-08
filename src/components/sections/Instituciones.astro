@@ -1,0 +1,56 @@
+---
+import Button from '@/components/ui/Button.astro';
+import { colegiosDestacados } from '@/data/colegios';
+
+const logos = [...colegiosDestacados, ...colegiosDestacados];
+---
+
+<section class="overflow-hidden bg-white py-20 md:py-28">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="reveal text-center">
+      <span
+        class="inline-block rounded-full bg-ambar/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-tierra"
+      >
+        Confianza
+      </span>
+      <h2
+        class="mt-6 font-display text-3xl font-bold leading-tight text-verde-bosque sm:text-4xl md:text-5xl"
+      >
+        Nos acompañan
+      </h2>
+      <p class="mx-auto mt-6 max-w-2xl text-base text-oscuro-suave md:text-lg">
+        Más de 120 instituciones ya viajaron con nosotros
+      </p>
+    </div>
+
+    <div class="reveal relative mt-16">
+      <div
+        class="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-linear-to-r from-white to-transparent"
+      ></div>
+      <div
+        class="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-linear-to-l from-white to-transparent"
+      ></div>
+
+      <div class="overflow-hidden">
+        <div class="animate-marquee-infinite flex w-max gap-8 md:gap-12">
+          {
+            logos.map((colegio) => (
+              <img
+                src={`/images/colegios/${colegio.archivo}`}
+                alt={colegio.nombre}
+                class="h-28 w-28 flex-shrink-0 object-contain md:h-32 md:w-32"
+                loading="lazy"
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal mt-12 text-center">
+      <Button variant="secondary" size="lg" href="/instituciones">
+        Ver todas las instituciones
+      </Button>
+    </div>
+  </div>
+</section>

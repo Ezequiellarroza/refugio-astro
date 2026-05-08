@@ -1,0 +1,58 @@
+---
+type Variant = 'primary' | 'secondary' | 'accent' | 'ghost' | 'white';
+type Size = 'sm' | 'md' | 'lg';
+
+interface Props {
+  variant?: Variant;
+  size?: Size;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  target?: string;
+  rel?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const variants: Record<Variant, string> = {
+  primary:
+    'bg-verde-sierra text-white hover:bg-verde-bosque hover:shadow-lg hover:-translate-y-0.5',
+  secondary:
+    'border-2 border-verde-sierra text-verde-sierra hover:bg-verde-sierra hover:text-white hover:shadow-lg hover:-translate-y-0.5',
+  accent:
+    'bg-ambar text-oscuro hover:bg-ambar-claro hover:shadow-lg hover:-translate-y-0.5',
+  ghost:
+    'bg-transparent text-verde-sierra hover:bg-verde-sierra/10 hover:-translate-y-0.5',
+  white:
+    'bg-white text-verde-sierra hover:bg-piedra-clara hover:shadow-lg hover:-translate-y-0.5',
+};
+
+const sizes: Record<Size, string> = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg',
+};
+
+const classes =
+  `inline-block rounded-lg font-body font-medium cursor-pointer transition-all duration-300 ${variants[variant]} ${sizes[size]} ${className}`.trim();
+---
+
+{
+  href ? (
+    <a href={href} class={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} {...rest}>
+      <slot />
+    </button>
+  )
+}

@@ -1,0 +1,69 @@
+---
+import { Compass, Zap, Shield, Star } from 'lucide-react';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import Button from '@/components/ui/Button.astro';
+
+const highlights = [
+  {
+    icon: Compass,
+    title: 'Orientación y Territorio',
+    text: 'Navegación técnica en 24 hectáreas privadas',
+  },
+  {
+    icon: Zap,
+    title: 'Actividades de Alta Intensidad',
+    text: 'Arquería, metegol humano, parque aéreo certificado',
+  },
+  {
+    icon: Shield,
+    title: 'Seguridad Integral',
+    text: 'Supervisión constante, infraestructura privada',
+  },
+  {
+    icon: Star,
+    title: 'Tecnología e Innovación',
+    text: 'Realidad virtual Meta Quest y observación astronómica',
+  },
+];
+---
+
+<section class="bg-verde-bosque py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <SectionTitle
+      subtitle="Experiencias"
+      title="14 Dinámicas de Alto Impacto"
+      align="center"
+      light
+    />
+
+    <p
+      class="reveal mx-auto mt-6 max-w-3xl text-center text-lg leading-relaxed text-piedra-clara"
+    >
+      Desde trekking interpretativo hasta parque aéreo certificado bajo normas
+      europeas. Cada experiencia está diseñada para fortalecer la cohesión, el
+      liderazgo y la autonomía de los grupos.
+    </p>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        highlights.map(({ icon: Icon, title, text }, i) => (
+          <div
+            class={`reveal stagger-${Math.min(i + 1, 6)} rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10`}
+          >
+            <Icon className="h-8 w-8 text-ambar" strokeWidth={1.5} />
+            <h3 class="mt-4 font-display text-xl font-bold text-white">
+              {title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-piedra-clara">{text}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-16 flex justify-center">
+      <Button variant="accent" href="/actividades">
+        Ver todas las experiencias →
+      </Button>
+    </div>
+  </div>
+</section>

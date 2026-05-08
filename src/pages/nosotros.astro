@@ -1,0 +1,209 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import Button from '@/components/ui/Button.astro';
+import ImageSlider from '@/components/ui/ImageSlider.tsx';
+import { Shield, Eye, Users } from 'lucide-react';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: 'Nosotros — Refugio del Valle Tandil',
+  description: 'Más de una década de experiencia en hospitalidad para grupos selectos en Tandil. Conocé la historia, el equipo y los pilares de Refugio del Valle.',
+  ogImage: '/images/og/og-nosotros.jpg',
+};
+
+const sliderImages = [
+  '/images/nosotros/nosotros-1.jpg',
+  '/images/nosotros/nosotros-2.jpg',
+  '/images/nosotros/nosotros-3.jpg',
+];
+
+const pilares = [
+  {
+    icon: Shield,
+    title: 'Idoneidad Profesional',
+    description: 'Certificaciones en medición de huella de carbono y gestión de cambio climático, alineados con los valores de sustentabilidad de las instituciones modernas.',
+  },
+  {
+    icon: Eye,
+    title: 'Diseño Funcional',
+    description: 'Un equilibrio preciso entre el contacto directo con la naturaleza y el confort técnico necesario para el descanso y la integración.',
+  },
+  {
+    icon: Users,
+    title: 'Transparencia Operativa',
+    description: 'Vivimos en el predio, lo que garantiza una supervisión directa y constante de cada detalle de la estancia.',
+  },
+];
+---
+
+<PageLayout
+  seo={seo}
+  hero={{
+    eyebrow: 'Nuestra historia',
+    title: 'Tu lugar de excelencia en las sierras de Tandil',
+    subtitle: 'La respuesta profesional a la demanda de instituciones de vanguardia.',
+    backgroundImage: '/images/nosotros/hero.jpg',
+    backgroundAlt: 'Refugio del Valle',
+  }}
+>
+  {/* 2. Trayectoria */}
+  <section class="bg-crema py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2">
+      <div>
+        <SectionTitle
+          subtitle="Nuestra trayectoria"
+          title="Más de una década construyendo el estándar"
+          align="left"
+        />
+
+        <div class="mt-8 space-y-4 leading-relaxed text-oscuro-suave/80">
+          <p class="reveal stagger-1">
+            Desde el año 2001, nuestra familia ha desarrollado una visión clara de la hospitalidad en Tandil. Con más de una década de experiencia en servicios de alojamiento de alto valor, hemos consolidado a Refugio del Valle como el estándar en infraestructura para grupos selectos.
+          </p>
+          <p class="reveal stagger-2">
+            Nuestra idoneidad no es casual: es el resultado de cinco años de investigación y análisis de modelos internacionales de hospitalidad grupal, aplicados hoy a nuestro entorno natural.
+          </p>
+        </div>
+
+        <div class="reveal stagger-3 mt-10 grid grid-cols-2 gap-6">
+          <div class="border-l-2 border-ambar pl-4">
+            <div class="font-display text-4xl font-bold text-verde-sierra">
+              2001
+            </div>
+            <div class="mt-1 text-sm uppercase tracking-wider text-oscuro-suave/60">
+              Año de fundación
+            </div>
+          </div>
+          <div class="border-l-2 border-ambar pl-4">
+            <div class="font-display text-4xl font-bold text-verde-sierra">
+              +10 años
+            </div>
+            <div class="mt-1 text-sm uppercase tracking-wider text-oscuro-suave/60">
+              De experiencia en grupos
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal relative">
+        <ImageSlider client:load images={sliderImages} aspect="aspect-[4/5]" />
+        <div class="absolute -bottom-4 -left-4 -z-10 h-full w-full rounded-2xl bg-verde-sierra/10"></div>
+      </div>
+    </div>
+  </section>
+
+  {/* 3. Pilares */}
+  <section class="bg-verde-bosque py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <SectionTitle
+        subtitle="Tu lugar"
+        title="Infraestructura pensada para grupos exigentes"
+        align="center"
+        light
+      />
+
+      <p class="reveal mx-auto mt-8 mb-16 max-w-2xl text-center leading-relaxed text-white/70">
+        Nos alejamos del concepto de espacios adaptados: nuestra infraestructura fue concebida desde su origen para facilitar la dinámica de grupos exigentes.
+      </p>
+
+      <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
+        {pilares.map((pilar, i) => {
+          const Icon = pilar.icon;
+          return (
+            <div class:list={[
+              'reveal',
+              `stagger-${i + 1}`,
+              'rounded-2xl border border-white/10 bg-white/5 p-8 transition-colors duration-300 hover:bg-white/10'
+            ]}>
+              <Icon className="mb-6 h-10 w-10 text-ambar" />
+              <h3 class="mb-3 font-display text-xl font-semibold text-white">
+                {pilar.title}
+              </h3>
+              <p class="text-sm leading-relaxed text-white/65">
+                {pilar.description}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  {/* 4. Concepto Refugio */}
+  <section class="bg-piedra-clara py-24">
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <SectionTitle
+        subtitle="El concepto"
+        title="Confort sin concesiones"
+        align="center"
+      />
+
+      <div class="reveal mx-auto mt-10 max-w-2xl border-l-4 border-ambar pl-8 text-left">
+        <p class="font-display text-2xl italic leading-snug text-oscuro md:text-3xl">
+          El nombre Refugio define un espacio donde la naturaleza no implica renunciar a la calidad.
+        </p>
+        <p class="mt-4 leading-relaxed text-oscuro-suave/70">
+          Es la estructura perfecta para que la institución pueda concentrarse exclusivamente en sus objetivos pedagógicos, delegando la logística en expertos.
+        </p>
+      </div>
+
+      <div class="reveal stagger-2 mx-auto mt-16 aspect-video max-w-3xl overflow-hidden rounded-2xl">
+        <img
+          src="/images/nosotros/construccion.jpg"
+          alt="El concepto Refugio"
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* 5. Co-creación */}
+  <section class="bg-crema py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2">
+      <div class="reveal-left aspect-[4/3] overflow-hidden rounded-2xl">
+        <img
+          src="/images/nosotros/filosofia.jpg"
+          alt="Co-creación de experiencias"
+          class="h-full w-full object-cover"
+        />
+      </div>
+
+      <div class="reveal-right">
+        <SectionTitle
+          subtitle="Co-creación"
+          title="No somos un proveedor, somos un socio estratégico"
+          align="left"
+        />
+
+        <p class="mt-8 leading-relaxed text-oscuro-suave/80">
+          Nuestra infraestructura es el lienzo sobre el cual cada institución diseña vivencias que marcan la formación de sus alumnos.
+        </p>
+
+        <div class="mt-8 rounded-2xl bg-verde-bosque p-8">
+          <span class="font-display text-6xl leading-none text-ambar">
+            "
+          </span>
+          <p class="font-display text-lg italic leading-relaxed text-white/85">
+            Brindamos la tranquilidad de que todo estará bien, fundamentada en nuestra experiencia y en un entorno diseñado para el éxito grupal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 6. CTA */}
+  <section class="bg-verde-sierra py-24">
+    <div class="mx-auto max-w-2xl px-6 text-center">
+      <h2 class="reveal mb-6 font-display text-4xl font-bold text-white md:text-5xl">
+        Asegure la calidad de su próximo proyecto institucional
+      </h2>
+      <p class="reveal stagger-1 mb-10 text-lg text-white/80">
+        Lo invitamos a conocer una propuesta donde la transparencia y el profesionalismo son nuestra carta de presentación.
+      </p>
+      <Button href="/contacto" variant="white" size="lg">
+        Hablemos de tu grupo
+      </Button>
+    </div>
+  </section>
+</PageLayout>

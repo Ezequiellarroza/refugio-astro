@@ -1,0 +1,78 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import ImageSlider from '@/components/ui/ImageSlider';
+
+const badges = [
+  'Flexibles',
+  'Inclusivas',
+  'Accesibles',
+  'Adaptadas',
+  'Innovadoras',
+  'Seguras',
+  'Confortables',
+  'Sustentables',
+];
+
+const images = [
+  '/images/nosotros/nosotros-1.jpg',
+  '/images/nosotros/nosotros-2.jpg',
+  '/images/nosotros/nosotros-3.jpg',
+  '/images/nosotros/nosotros-4.jpg',
+  '/images/nosotros/nosotros-5.jpg',
+  '/images/nosotros/nosotros-6.jpg',
+];
+---
+
+<section class="bg-crema py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <SectionTitle
+          subtitle="Nuestra historia"
+          title="Más de una década creando experiencias"
+          align="left"
+        />
+
+        <div class="mt-8 space-y-4 text-oscuro-suave/80 leading-relaxed">
+          <p class="reveal stagger-1">
+            Desde 2001, nuestra familia gestiona el predio Valle de los Ciervos
+            en las sierras de Tandil. Lo que comenzó como un emprendimiento
+            familiar se transformó en una pasión: crear experiencias memorables
+            para grupos e instituciones.
+          </p>
+          <p class="reveal stagger-2">
+            Con más de 10 años de trayectoria recibiendo contingentes, pensamos
+            el Refugio para innovar en el sector, ofreciendo un espacio donde la
+            naturaleza, la seguridad y la diversión se combinan de manera única.
+          </p>
+          <p class="reveal stagger-3">
+            Nuestras experiencias son diseñadas para ser:
+          </p>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          {
+            badges.map((badge, i) => (
+              <span
+                class={`reveal stagger-${Math.min(i + 1, 6)} rounded-full bg-verde-sierra/10 px-4 py-2 text-sm font-medium text-verde-sierra`}
+              >
+                {badge}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="reveal relative">
+        <ImageSlider
+          client:visible
+          images={images}
+          aspect="aspect-[4/5]"
+        />
+        <div
+          class="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-2xl bg-verde-sierra/10"
+        ></div>
+      </div>
+    </div>
+  </div>
+</section>

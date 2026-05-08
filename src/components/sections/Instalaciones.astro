@@ -1,0 +1,198 @@
+---
+import {
+  Bed,
+  UtensilsCrossed,
+  ChefHat,
+  Building2,
+  Bath,
+} from 'lucide-react';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import ImageSlider from '@/components/ui/ImageSlider';
+
+interface Edificio {
+  id: string;
+  name: string;
+  capacity: string;
+  description: string;
+  images: string[];
+}
+
+const edificios: Edificio[] = [
+  {
+    id: 'refugio',
+    name: 'El Refugio',
+    capacity: '170 huéspedes',
+    description:
+      'Edificio principal con habitaciones compartidas, salón comedor para 170 personas, cocina industrial y SUM de 300 m².',
+    images: [
+      '/images/instalaciones/refugio-1.jpg',
+      '/images/instalaciones/refugio-2.jpg',
+      '/images/instalaciones/refugio-3.jpg',
+      '/images/instalaciones/refugio-4.jpg',
+      '/images/instalaciones/refugio-5.jpg',
+      '/images/instalaciones/refugio-6.jpg',
+    ],
+  },
+  {
+    id: 'mirador',
+    name: 'El Mirador',
+    capacity: '60 huéspedes',
+    description:
+      'Segundo edificio con vista panorámica a las sierras. Habitaciones compartidas con baño privado y espacios comunes propios.',
+    images: [
+      '/images/instalaciones/mirador-1.jpg',
+      '/images/instalaciones/mirador-2.jpg',
+      '/images/instalaciones/mirador-3.jpg',
+      '/images/instalaciones/mirador-4.jpg',
+      '/images/instalaciones/mirador-5.jpg',
+      '/images/instalaciones/mirador-6.jpg',
+    ],
+  },
+];
+
+const instalaciones = [
+  {
+    icon: Bed,
+    title: 'Habitaciones',
+    description:
+      '15 habitaciones para 10 personas con baño compartido. 6 habitaciones para 2 personas con baño privado.',
+  },
+  {
+    icon: UtensilsCrossed,
+    title: 'Salón Comedor',
+    description:
+      '100 m² de superficie con capacidad para 140 personas sentadas. Menú variado con opciones para celíacos, vegetarianos y alérgicos.',
+  },
+  {
+    icon: ChefHat,
+    title: 'Cocina Industrial',
+    description:
+      'Equipada para atender a todos los huéspedes simultáneamente. Habilitación bromatológica al día.',
+  },
+  {
+    icon: Building2,
+    title: 'SUM',
+    description:
+      '200 m² cubiertos para actividades grupales, talleres, proyecciones y eventos bajo techo en días de lluvia.',
+  },
+  {
+    icon: Bath,
+    title: 'Baños',
+    description:
+      '4 baños. 28 Duchas. 20 inodoros. 16 Lavatorios. Baños accesibles para personas con movilidad reducida.',
+  },
+];
+---
+
+<section class="bg-crema py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <SectionTitle
+      subtitle="Instalaciones"
+      title="Dos edificios, una experiencia"
+      description="Infraestructura completa pensada para grupos, con todo lo necesario para una estadía cómoda y segura."
+    />
+
+    <div class="reveal mt-12 flex justify-center gap-4" data-tabs>
+      {
+        edificios.map((e, i) => (
+          <button
+            type="button"
+            data-tab-button={e.id}
+            class={`cursor-pointer rounded-xl px-6 py-3 font-medium transition-all duration-300 ${
+              i === 0
+                ? 'bg-verde-sierra text-white shadow-lg'
+                : 'bg-white text-oscuro-suave hover:bg-piedra-clara'
+            }`}
+          >
+            {e.name}
+            <span class="ml-2 text-sm opacity-70">({e.capacity})</span>
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      edificios.map((e, i) => (
+        <div
+          data-tab-panel={e.id}
+          class="reveal mt-8 rounded-2xl bg-white p-8 shadow-md"
+          style={i === 0 ? '' : 'display: none;'}
+        >
+          <div class="grid items-center gap-8 lg:grid-cols-2">
+            <div>
+              <h3 class="font-display text-3xl font-bold text-verde-bosque">
+                {e.name}
+              </h3>
+              <span class="mt-2 inline-block rounded-full bg-ambar/20 px-3 py-1 text-sm font-medium text-ambar">
+                {e.capacity}
+              </span>
+              <p class="mt-4 leading-relaxed text-oscuro-suave/80">
+                {e.description}
+              </p>
+            </div>
+            <ImageSlider
+              client:visible
+              images={e.images}
+              aspect="aspect-video"
+            />
+          </div>
+        </div>
+      ))
+    }
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        instalaciones.map(({ icon: Icon, title, description }, i) => (
+          <div
+            class={`reveal stagger-${Math.min(i + 1, 6)} rounded-2xl bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
+          >
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-verde-sierra/10 text-verde-sierra">
+              <Icon size={24} />
+            </div>
+            <h4 class="font-display text-lg font-semibold text-verde-bosque">
+              {title}
+            </h4>
+            <p class="mt-2 text-sm leading-relaxed text-oscuro-suave/70">
+              {description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabsContainer = document.querySelector<HTMLElement>('[data-tabs]');
+  if (tabsContainer) {
+    const buttons = tabsContainer.querySelectorAll<HTMLButtonElement>(
+      '[data-tab-button]'
+    );
+    const panels = document.querySelectorAll<HTMLElement>('[data-tab-panel]');
+
+    const activeClasses = ['bg-verde-sierra', 'text-white', 'shadow-lg'];
+    const inactiveClasses = [
+      'bg-white',
+      'text-oscuro-suave',
+      'hover:bg-piedra-clara',
+    ];
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab-button');
+
+        buttons.forEach((b) => {
+          b.classList.remove(...activeClasses);
+          b.classList.add(...inactiveClasses);
+        });
+        btn.classList.remove(...inactiveClasses);
+        btn.classList.add(...activeClasses);
+
+        panels.forEach((p) => {
+          const panelId = p.getAttribute('data-tab-panel');
+          p.style.display = panelId === targetId ? '' : 'none';
+        });
+      });
+    });
+  }
+</script>

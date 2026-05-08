@@ -1,0 +1,76 @@
+---
+import { Flower2 } from 'lucide-react';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import ImageSlider from '@/components/ui/ImageSlider';
+
+const productos = [
+  'Quesos Santo Padre',
+  'Salamines artesanales',
+  'Alfajores regionales',
+  'Miel multifloral',
+  'Dulces caseros',
+  'Productos de la colmena',
+];
+
+const images = [
+  '/images/casita-abeja/casita-1.jpg',
+  '/images/casita-abeja/casita-2.jpg',
+  '/images/casita-abeja/casita-3.jpg',
+  '/images/casita-abeja/casita-4.jpg',
+  '/images/casita-abeja/casita-5.jpg',
+  '/images/casita-abeja/casita-6.jpg',
+];
+---
+
+<section class="bg-crema py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <SectionTitle
+      subtitle="La Casita de la Abejita"
+      title="Tienda regional y colmena viva"
+      description="Un espacio único donde los visitantes descubren el mundo de las abejas y los productos regionales de Tandil."
+    />
+
+    <div class="mt-16 grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <div class="reveal rounded-2xl bg-white p-8 shadow-md">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-ambar/20 text-ambar">
+            <Flower2 size={24} />
+          </div>
+
+          <h3 class="font-display text-2xl font-bold text-verde-bosque">
+            Colmena Viva
+          </h3>
+          <p class="mt-3 leading-relaxed text-oscuro-suave/80">
+            Una pared de vidrio permite observar en vivo a más de 50.000 abejas
+            trabajando en su colmena. Una experiencia educativa fascinante para
+            todas las edades.
+          </p>
+
+          <h4 class="mt-8 font-display text-lg font-semibold text-verde-bosque">
+            Productos Regionales
+          </h4>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {
+              productos.map((p) => (
+                <span class="rounded-full bg-ambar/10 px-3 py-1.5 text-sm font-medium text-tierra">
+                  {p}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal relative">
+        <ImageSlider
+          client:visible
+          images={images}
+          aspect="aspect-[4/3]"
+        />
+        <div
+          class="absolute -bottom-4 -left-4 -z-10 h-full w-full rounded-2xl bg-ambar/10"
+        ></div>
+      </div>
+    </div>
+  </div>
+</section>

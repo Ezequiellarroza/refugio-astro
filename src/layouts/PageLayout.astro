@@ -1,0 +1,31 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHero from '@/components/sections/PageHero.astro';
+import type { SEOProps } from '@/types/seo';
+
+interface Props {
+  seo: SEOProps;
+  hero: {
+    eyebrow?: string;
+    title: string;
+    subtitle?: string;
+    backgroundImage: string;
+    backgroundAlt: string;
+  };
+}
+
+const { seo, hero } = Astro.props;
+---
+
+<BaseLayout seo={seo}>
+  <PageHero
+    eyebrow={hero.eyebrow}
+    title={hero.title}
+    subtitle={hero.subtitle}
+    backgroundImage={hero.backgroundImage}
+    backgroundAlt={hero.backgroundAlt}
+  />
+  <main>
+    <slot />
+  </main>
+</BaseLayout>

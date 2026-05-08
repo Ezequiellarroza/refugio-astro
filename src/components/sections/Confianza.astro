@@ -1,0 +1,99 @@
+---
+import { ShieldCheck, Accessibility, Leaf, HeartPulse } from 'lucide-react';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+
+const bloques = [
+  {
+    icon: ShieldCheck,
+    title: 'Seguridad',
+    items: [
+      'Seguro integral para todos los huéspedes',
+      'Personal de seguridad 24 horas',
+      'Protocolos de emergencia actualizados',
+      'Matafuegos en todas las áreas',
+      'Iluminación perimetral completa',
+      'Cámaras de seguridad',
+      'Comunicación directa con emergencias locales',
+    ],
+  },
+  {
+    icon: Accessibility,
+    title: 'Accesibilidad',
+    items: [
+      'Predio 100% accesible',
+      'Rampas en todos los accesos',
+      'Baños adaptados para movilidad reducida',
+      'Senderos accesibles señalizados',
+      'Personal capacitado en inclusión',
+      'Experiencias adaptables a cada necesidad',
+    ],
+  },
+  {
+    icon: Leaf,
+    title: 'Sustentabilidad',
+    items: [
+      'Separación y gestión de residuos',
+      'Uso responsable del agua',
+      'Energía solar en áreas comunes',
+      'Reforestación activa del predio',
+      'Talleres de concientización ambiental',
+      'Productos regionales y de estación',
+    ],
+  },
+];
+---
+
+<section class="bg-piedra-clara py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <SectionTitle
+      subtitle="Tu confianza, nuestra prioridad"
+      title="Seguridad, accesibilidad y sustentabilidad"
+      description="Sabemos que detrás de cada viaje de egresados hay familias que confían. Por eso cuidamos cada detalle."
+    />
+
+    <div class="reveal mt-12 mx-auto max-w-2xl rounded-2xl bg-white p-6 shadow-md">
+      <div class="flex items-center gap-4">
+        <div
+          class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-500"
+        >
+          <HeartPulse size={28} />
+        </div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-verde-bosque">
+            Área Cardio Protegida
+          </h3>
+          <p class="mt-1 text-sm text-oscuro-suave/70">
+            Contamos con desfibrilador externo automático (DEA) y personal
+            capacitado en RCP. La salud de los huéspedes es nuestra prioridad
+            número uno.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 grid gap-8 lg:grid-cols-3">
+      {
+        bloques.map(({ icon: Icon, title, items }, i) => (
+          <div
+            class={`reveal stagger-${i + 1} rounded-2xl bg-white p-8 shadow-md`}
+          >
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-verde-sierra/10 text-verde-sierra">
+              <Icon size={24} />
+            </div>
+            <h3 class="font-display text-xl font-bold text-verde-bosque">
+              {title}
+            </h3>
+            <ul class="mt-4 space-y-2">
+              {items.map((item) => (
+                <li class="flex items-start gap-2 text-sm text-oscuro-suave/70">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-verde-musgo" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

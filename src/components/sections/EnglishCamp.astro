@@ -1,0 +1,68 @@
+---
+import { Globe, Users, Calendar, Sparkles } from 'lucide-react';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import Button from '@/components/ui/Button.astro';
+
+const features = [
+  {
+    icon: Globe,
+    title: 'Inmersión Total',
+    description: 'Actividades 100% en inglés durante toda la estadía.',
+  },
+  {
+    icon: Users,
+    title: 'Counselors Nativos',
+    description:
+      'Staff bilingüe y hablantes nativos del inglés acompañan cada actividad.',
+  },
+  {
+    icon: Calendar,
+    title: '3 Días / 2 Noches',
+    description:
+      'Programa intensivo diseñado para maximizar el aprendizaje vivencial.',
+  },
+  {
+    icon: Sparkles,
+    title: '+15 Años de Experiencia',
+    description:
+      'A cargo de Fase 2, referentes en campamentos de inglés en Argentina.',
+  },
+];
+---
+
+<section class="bg-verde-bosque py-24">
+  <div class="mx-auto max-w-7xl px-6">
+    <SectionTitle
+      subtitle="English Immersion Camp"
+      title="Aprender inglés viviendo en inglés"
+      description="Un programa premium de inmersión lingüística en plena naturaleza. Los alumnos viven, juegan, crean y se expresan íntegramente en inglés."
+      light
+    />
+
+    <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        features.map(({ icon: Icon, title, description }, i) => (
+          <div
+            class={`reveal stagger-${Math.min(i + 1, 6)} rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm`}
+          >
+            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-ambar/20 text-ambar-claro">
+              <Icon size={28} />
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white">
+              {title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-piedra-clara/70">
+              {description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-12 text-center">
+      <Button variant="accent" size="lg" href="/contacto">
+        Consultá por el English Camp
+      </Button>
+    </div>
+  </div>
+</section>
