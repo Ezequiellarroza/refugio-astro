@@ -1,0 +1,144 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+
+interface Bloque {
+  titulo: string;
+  puntos: string[];
+}
+
+const bloques: Bloque[] = [
+  {
+    titulo: 'Contexto circundante al establecimiento',
+    puntos: [
+      'Contar con un acceso sin ningún tipo de obstáculos, resaltos, mobiliario urbano y superficie fácilmente transitable, garantizando la libre circulación de una persona con discapacidad y/o movilidad reducida. Evitar la colocación de gravas, césped, arena, entre otros.',
+      'Garantizar que la presencia de árboles, vegetación, maceteros y otros elementos existentes en la vía pública, no interfiera en la circulación peatonal. Dejar un espacio libre de tránsito de 1.50 metros próximos al ingreso que garantice el radio de giro de una persona en silla de ruedas.',
+      'En aquellos entornos inmediatos con existencia de obstáculos, disponer de caminerías o senderos con un ancho mínimo de 1,20 metros, evitando la presencia de elementos colgantes para permitir, así, una altura libre no inferior a 2.10 metros. Para estas caminerías o senderos utilizar también material antideslizante que asegure el desplazamiento desde la vereda hasta la puerta de ingreso principal.',
+      'Salvar los desniveles existentes, al menos en un sector del cordón de ingreso, con el fin de disponer un espacio accesible entre la vereda y la calle.',
+    ],
+  },
+  {
+    titulo: 'Ingresos, puertas y ventanas',
+    puntos: [
+      'Garantizar en los accesos la ausencia de obstáculos y contemplar un ancho de puertas de 0,90 metros, garantizando así 0,80 metros libres de paso.',
+      'Garantizar, en caso de contar con escaleras, una rampa como opción de acceso. Ambas deberán ser accesibles. Asimismo, evitar utilizar como ingreso accesible una entrada secundaria al establecimiento.',
+      'Garantizar que los espacios anteriores y posteriores de las puertas se encuentren en el mismo plano y permitan un giro completo a los usuarios de sillas de ruedas -diámetro de 1,50 metros-.',
+    ],
+  },
+  {
+    titulo: 'Pasillos',
+    puntos: [
+      'Asegurar una circulación horizontal que permita el desplazamiento de una silla de ruedas, con un ancho mínimo de 0.90 metros -siendo lo aconsejable 1,20 metros para nuevas construcciones-, y contemplar cada 10,00 metros un radio de giro de 1,50 metros. Colocar pasamanos cuando se presente un desplazamiento en pendiente a 0,90 metros.',
+    ],
+  },
+  {
+    titulo: 'Pavimentos y pisos',
+    puntos: [
+      'Asegurar que los pavimentos de itinerarios accesibles sean firmes y continuos, sin resaltos y con material antideslizante. Evitar, en espacios interiores, el empleo de alfombras de alto espesor que dificultan el desplazamiento en sillas de ruedas.',
+      'Situar las rejillas en sentido perpendicular a la circulación y otros elementos fuera del espacio de circulación. Prever una pendiente lateral al sendero del 2% para permitir el escurrimiento del agua.',
+      'Garantizar, para planos del suelo de terreno natural, la ausencia de elementos sueltos como piedras o gravilla. Asegurar su construcción utilizando material compacto.',
+    ],
+  },
+  {
+    titulo: 'Rampas',
+    puntos: [
+      'Contemplar las normas vigentes en cuanto a las medidas de las pendientes de rampas, disponiendo de un espacio libre que permita el giro de la silla de ruedas: el diámetro de tal superficie debe ser al menos de 1,50 metros.',
+      'Construir rampas de material antideslizante, con una pendiente máxima del 10%, tomando como referencia la altura a salvar.',
+    ],
+  },
+  {
+    titulo: 'Sanitarios',
+    puntos: [
+      'Evitar, en lo posible, la categorización entre "femenino", "masculino" y "persona con discapacidad".',
+      'Prever un recorrido a los sanitarios sin obstáculos ni desniveles, con un espacio de aproximación anterior y posterior a las puertas de 1.20 metros.',
+      'Prever puertas con apertura hacia el exterior y con un ancho mínimo libre de paso de 0.90 metros.',
+      'Disponer una dimensión interior con un radio de giro de 1,50 metros libre de obstáculos.',
+      'Asegurar interruptores de presión y pisos antideslizantes.',
+    ],
+  },
+  {
+    titulo: 'Inodoro',
+    puntos: [
+      'Asegurar un espacio de 0.85 metros para permitir la transferencia lateral desde la silla de ruedas al inodoro.',
+      'El plano del asiento del mismo se debe emplazar a una altura de 0.45 metros del piso.',
+      'El accionamiento del depósito debe ser mediante pulsador o palanca a una altura de 1.10 metros.',
+      'Colocar barral fijo horizontal sobre un lateral, que contemple una longitud de 1.10 metros y una altura de 0.75 metros, a 0.35 metros del eje del inodoro.',
+      'Colocar un barral rebatible del lado donde se realiza la transferencia, a una altura de 0,75 metros a nivel del suelo, considerando la parte superior del mismo. En caso que la transferencia se lleve a cabo por ambos laterales, se requiere que los dos barrales sean rebatibles.',
+      'El dispensador de papel higiénico debe ubicarse a una altura mínima de 0.50 metros del piso, dentro del radio de alcance manual.',
+    ],
+  },
+  {
+    titulo: 'Lavatorio',
+    puntos: [
+      'Los lavatorios deben instalarse adosados a la pared o empotrados y deben soportar una carga vertical de cien kilos. De haber más de uno, la distancia entre estos será de 0.90 metros entre ejes.',
+      'Utilizar el lavatorio asegurando una altura de 0,75 metros, una profundidad máxima de 0.65 y un espacio libre frontal de 0.90.',
+      'Contemplar grifería en forma de cruz, a presión o mono comando, ya que permite el fácil accionamiento para la persona con discapacidad.',
+      'Recubrir el caño del lavatorio para evitar posibles quemaduras: la persona en silla de ruedas no cuenta con sensibilidad en sus piernas, lo que le impide percibir las temperaturas.',
+    ],
+  },
+  {
+    titulo: 'Duchas',
+    puntos: [
+      'Evitar la presencia de zócalo a los efectos de posibilitar el ingreso con sillas de ruedas, previendo un solado antideslizante con una inclinación adecuada que asegure el fácil escurrimiento del agua.',
+      'Utilizar una grifería de fácil accionamiento -forma de cruz, presión o mono comando- emplazada a una altura accesible para la persona con discapacidad, no superior a 1,20 metros.',
+      'Utilizar asiento de ducha, pudiendo ser rebatible, que contemple una profundidad de 0.50 metros y una altura de 0,45.',
+      'Colocar barral fijo vertical a una altura de 0.90 metros con el fin de permitir la transferencia, complementándose con un barral fijo horizontal que dé continuidad al anterior, formando una "L" -comenzando a 0.90 metros y alcanzando 1.80 metros-.',
+      'Colocar un duchador de mano con un soporte a doble altura -para el uso de una persona sentada- no superior a 1,20 metros.',
+      'Utilizar un recipiente para shampoo y acondicionador colocado en la pared frontal o lateral respecto de la ubicación del asiento rebatible, a una altura no superior a 1,20 metros, asegurando que se encuentre dentro del radio de alcance manual desde el plano de asiento.',
+      'Colocar cortina de baño de fácil deslizamiento para la persona con discapacidad y/o movilidad reducida.',
+    ],
+  },
+  {
+    titulo: 'Habitaciones accesibles',
+    puntos: [
+      'Circulaciones interiores con un ancho mínimo de 0.90 metros.',
+      'Puertas de 0.90 metros (garantizando así 0,80 metros libres de paso). Espacio de aproximación de 1.20 metros, contemplando una altura mínima de paso de 2.10.',
+      'Camas a una altura de 0.50 metros.',
+    ],
+  },
+];
+---
+
+<section class="bg-white py-24">
+  <div class="mx-auto max-w-4xl px-6">
+    <SectionTitle
+      subtitle="Normas que cumplimos"
+      title="Cumplimos con los estándares de diseño universal"
+      align="center"
+    />
+
+    <div class="reveal mt-12 space-y-3">
+      {bloques.map((bloque) => (
+        <details class="group rounded-2xl border border-piedra bg-crema/50 transition-colors hover:bg-crema">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 font-display text-lg font-semibold text-verde-bosque md:text-xl">
+            <span>{bloque.titulo}</span>
+            <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-verde-sierra/10 text-verde-sierra transition-transform group-open:rotate-45">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </span>
+          </summary>
+          <ul class="space-y-3 px-6 pb-6 pt-2 text-oscuro-suave/80">
+            {bloque.puntos.map((punto) => (
+              <li class="flex gap-3 leading-relaxed">
+                <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-ambar"></span>
+                <span>{punto}</span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

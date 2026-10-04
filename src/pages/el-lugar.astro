@@ -61,6 +61,7 @@ const highlights = [
 <PageLayout
   seo={seo}
   hero={{
+    type: 'image' as const,
     eyebrow: 'El entorno',
     title: 'El entorno natural de Tandil, a tu servicio',
     subtitle: 'Un activo estratégico en Tandil diseñado para la excelencia institucional.',
@@ -204,16 +205,19 @@ const highlights = [
     </div>
   </section>
 
-  {/* 7. Tour 360° */}
+  {/* 7. Recorridos virtuales */}
   <section class="bg-piedra-clara py-12">
     <div class="mx-auto max-w-7xl px-6">
       <SectionTitle
-        subtitle="Recorrido virtual"
-        title="Conocé el predio desde donde estés"
+        subtitle="Recorridos virtuales"
+        title="Conocé los espacios desde donde estés"
         align="center"
       />
 
-      <div class="reveal mt-12 overflow-hidden rounded-2xl">
+      <h3 class="reveal mt-8 mb-4 text-center font-display text-xl font-semibold text-verde-bosque">
+        Recorrido general del predio
+      </h3>
+      <div class="reveal overflow-hidden rounded-2xl">
         <iframe
           src="https://espacios360.com.ar/refugio"
           height="520"
@@ -221,6 +225,38 @@ const highlights = [
           style="border: none; display: block;"
           title="Tour 360° Refugio del Valle"
           allowfullscreen
+        ></iframe>
+      </div>
+
+      <h3 class="reveal mt-12 mb-4 text-center font-display text-xl font-semibold text-verde-bosque">
+        Salón Refugio del Valle
+      </h3>
+      <div class="reveal overflow-hidden rounded-2xl">
+        <iframe
+          src="https://my.matterport.com/show?play=1&lang=en-US&m=ihoNSUqdSBn&sm=2&sr=-2.24,.36,2.72&sp=-3.58,16.37,-13.72"
+          height="520"
+          width="100%"
+          style="border: none; display: block;"
+          title="Tour 3D Salón Refugio del Valle"
+          allow="xr-spatial-tracking; fullscreen"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <h3 class="reveal mt-12 mb-4 text-center font-display text-xl font-semibold text-verde-bosque">
+        Edificio Mirador
+      </h3>
+      <div class="reveal overflow-hidden rounded-2xl">
+        <iframe
+          src="https://my.matterport.com/show?play=1&lang=en-US&m=rHh24wBEsM5"
+          height="520"
+          width="100%"
+          style="border: none; display: block;"
+          title="Tour 3D Edificio Mirador"
+          allow="xr-spatial-tracking; fullscreen"
+          allowfullscreen
+          loading="lazy"
         ></iframe>
       </div>
     </div>

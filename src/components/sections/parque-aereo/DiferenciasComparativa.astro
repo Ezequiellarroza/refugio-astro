@@ -1,0 +1,70 @@
+---
+import { Check, X } from 'lucide-react';
+import diferencias from '@/data/diferenciasParqueAereo';
+---
+
+<section class="bg-crema py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal text-center">
+      <span
+        class="inline-block rounded-full bg-ambar/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-tierra"
+      >
+        Por qué este parque es diferente
+      </span>
+      <h2
+        class="mt-6 font-display text-3xl font-bold leading-tight text-verde-bosque sm:text-4xl md:text-5xl"
+      >
+        Cinco diferencias que importan
+      </h2>
+      <p class="mx-auto mt-6 max-w-3xl text-base text-oscuro-suave md:text-lg">
+        No buscamos imitar otras propuestas de la zona: las superamos en los
+        aspectos que más importan para un viaje educativo.
+      </p>
+    </div>
+
+    <div class="mt-16 space-y-8 md:space-y-12">
+      {
+        diferencias.map((item, index) => (
+          <div class={`reveal stagger-${Math.min(index + 1, 6)}`}>
+            <p class="mb-4 text-center text-sm font-medium uppercase tracking-wider text-ambar">
+              {item.titulo}
+            </p>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+              <div class="rounded-2xl bg-verde-sierra p-6 shadow-lg md:p-8">
+                <div class="mb-3 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-ambar-claro">
+                  <Check size={16} strokeWidth={2.5} />
+                  <span>Refugio del Valle</span>
+                </div>
+                <p class="text-base font-medium text-white md:text-lg">
+                  {item.nosotros}
+                </p>
+              </div>
+
+              <div class="rounded-2xl border border-piedra bg-white/40 p-6 md:p-8">
+                <div class="mb-3 flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-piedra">
+                  <X size={16} strokeWidth={2.5} />
+                  <span>Otros lugares</span>
+                </div>
+                <p class="text-base text-oscuro-suave/70 md:text-lg">
+                  {item.otros}
+                </p>
+              </div>
+            </div>
+
+            <p class="mx-auto mt-6 max-w-2xl text-center text-base md:text-lg italic font-medium leading-relaxed text-verde-bosque/90">
+              {item.cierre}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <blockquote class="reveal mx-auto mt-16 max-w-3xl border-l-4 border-ambar pl-8">
+      <p
+        class="font-display text-2xl italic leading-relaxed text-verde-bosque md:text-3xl"
+      >
+        Más seguro. Más eficiente. Más humano. Más nuestro.
+      </p>
+    </blockquote>
+  </div>
+</section>

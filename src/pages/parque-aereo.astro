@@ -1,0 +1,35 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Introduccion from '@/components/sections/parque-aereo/Introduccion.astro';
+import Stats from '@/components/sections/parque-aereo/Stats.astro';
+import ExperienciaUnica from '@/components/sections/parque-aereo/ExperienciaUnica.astro';
+import PensadoParaGrupos from '@/components/sections/parque-aereo/PensadoParaGrupos.astro';
+import DiferenciasComparativa from '@/components/sections/parque-aereo/DiferenciasComparativa.astro';
+import CtaFinal from '@/components/sections/parque-aereo/CtaFinal.astro';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: 'Parque Aéreo Educativo | Refugio del Valle Tandil',
+  description: 'El primer parque aéreo de Argentina diseñado exclusivamente para contingentes escolares. 7 tirolesas, 21 puentes y sistema de seguridad CouDou Pro® francés. Dentro del predio, sin traslados.',
+};
+
+const hero = {
+  type: 'video' as const,
+  eyebrow: 'Nueva actividad',
+  title: 'Parque Aéreo Educativo',
+  subtitle: 'El primer parque aéreo de Argentina diseñado exclusivamente para contingentes escolares.',
+  videoHorizontal: '/videos/parque-aereo/parque-aereo-horizontal.mp4',
+  videoVertical: '/videos/parque-aereo/parque-aereo-vertical.mp4',
+  posterHorizontal: '/images/parque-aereo/hero-horizontal-poster.jpg',
+  posterVertical: '/images/parque-aereo/hero-vertical-poster.jpg',
+};
+---
+
+<PageLayout seo={seo} hero={hero}>
+  <Introduccion />
+  <Stats />
+  <ExperienciaUnica />
+  <PensadoParaGrupos />
+  <DiferenciasComparativa />
+  <CtaFinal />
+</PageLayout>

@@ -39,69 +39,71 @@ export default function Navbar({ pathname }: NavbarProps) {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 shadow-md backdrop-blur-md'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="/">
-          <img
-            src="/images/logo.png"
-            alt="Refugio del Valle"
-            style={
-              isScrolled
-                ? {
-                    filter:
-                      'brightness(0) saturate(100%) invert(27%) sepia(60%) saturate(500%) hue-rotate(103deg) brightness(90%)',
-                  }
-                : {}
-            }
-            className="h-16 w-auto transition-all duration-300"
-          />
-        </a>
-
-        <ul className="hidden items-center gap-8 lg:flex">
-          {NAV_LINKS.map(({ label, to }) => (
-            <li key={to}>
-              <a
-                href={to}
-                className={`text-sm font-medium transition-colors duration-300 hover:text-ambar ${
-                  isScrolled ? 'text-oscuro-suave' : 'text-white/90'
-                }`}
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden lg:block">
-          <a
-            href="/contacto"
-            className={`!flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-300 ${
-              isScrolled
-                ? 'bg-verde-sierra text-white hover:bg-verde-bosque hover:shadow-lg hover:-translate-y-0.5'
-                : 'bg-white text-verde-sierra hover:bg-piedra-clara hover:shadow-lg hover:-translate-y-0.5'
-            }`}
-          >
-            <Phone size={16} />
-            Contactanos
+    <>
+      <nav
+        className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/90 shadow-md backdrop-blur-md'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <a href="/">
+            <img
+              src="/images/logo.png"
+              alt="Refugio del Valle"
+              style={
+                isScrolled
+                  ? {
+                      filter:
+                        'brightness(0) saturate(100%) invert(27%) sepia(60%) saturate(500%) hue-rotate(103deg) brightness(90%)',
+                    }
+                  : {}
+              }
+              className="h-16 w-auto transition-all duration-300"
+            />
           </a>
-        </div>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`cursor-pointer lg:hidden transition-colors duration-300 ${
-            isScrolled ? 'text-verde-bosque' : 'text-white'
-          }`}
-          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
+          <ul className="hidden items-center gap-8 lg:flex">
+            {NAV_LINKS.map(({ label, to }) => (
+              <li key={to}>
+                <a
+                  href={to}
+                  className={`text-sm font-medium transition-colors duration-300 hover:text-ambar ${
+                    isScrolled ? 'text-oscuro-suave' : 'text-white/90'
+                  }`}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="hidden lg:block">
+            <a
+              href="/contacto"
+              className={`!flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-300 ${
+                isScrolled
+                  ? 'bg-verde-sierra text-white hover:bg-verde-bosque hover:shadow-lg hover:-translate-y-0.5'
+                  : 'bg-white text-verde-sierra hover:bg-piedra-clara hover:shadow-lg hover:-translate-y-0.5'
+              }`}
+            >
+              <Phone size={16} />
+              Contactanos
+            </a>
+          </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={`cursor-pointer lg:hidden transition-colors duration-300 ${
+              isScrolled ? 'text-verde-bosque' : 'text-white'
+            }`}
+            aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </nav>
 
       <div
         className={`fixed inset-0 z-40 bg-oscuro/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
@@ -155,6 +157,6 @@ export default function Navbar({ pathname }: NavbarProps) {
           </a>
         </div>
       </div>
-    </nav>
+    </>
   );
 }

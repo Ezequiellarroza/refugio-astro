@@ -1,0 +1,27 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Introduccion from '@/components/sections/accesibilidad/Introduccion.astro';
+import NormasCumplidas from '@/components/sections/accesibilidad/NormasCumplidas.astro';
+import AreaCardioProtegida from '@/components/sections/accesibilidad/AreaCardioProtegida.astro';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: '100% Accesible | Refugio del Valle Tandil',
+  description: 'Refugio del Valle aplica las principales recomendaciones de diseño universal. Conocé las normas de accesibilidad que cumplimos y el área cardio protegida del predio.',
+};
+
+const hero = {
+  type: 'image' as const,
+  eyebrow: 'Accesibilidad',
+  title: '100% Accesible',
+  subtitle: 'Refugio del Valle aplica normas de diseño universal para garantizar que todos los huéspedes puedan disfrutar del lugar sin barreras.',
+  backgroundImage: '/images/nosotros/hero.jpg',
+  backgroundAlt: 'Refugio del Valle, espacio accesible para todos',
+};
+---
+
+<PageLayout seo={seo} hero={hero}>
+  <Introduccion />
+  <NormasCumplidas />
+  <AreaCardioProtegida />
+</PageLayout>

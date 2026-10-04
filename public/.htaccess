@@ -43,7 +43,7 @@ RedirectMatch 301 ^/mirador-3d/?$                             https://www.refugi
 RedirectMatch 301 ^/english-immersion-camp/?$                 https://www.refugiodelvalletandil.com.ar/english-camp
 RedirectMatch 301 ^/area-cardio-protegida/?$                  https://www.refugiodelvalletandil.com.ar/
 RedirectMatch 301 ^/la-casa-de-la-abejita/?$                  https://www.refugiodelvalletandil.com.ar/
-RedirectMatch 301 ^/instituciones-que-confian-en-nosotros/?$  https://www.refugiodelvalletandil.com.ar/
+RedirectMatch 301 ^/instituciones-que-confian-en-nosotros/?$  https://www.refugiodelvalletandil.com.ar/instituciones
 
 # --------------------------------------------
 # 6. Página 404

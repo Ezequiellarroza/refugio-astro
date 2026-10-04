@@ -5,15 +5,17 @@ import Button from '@/components/ui/Button.astro';
 
 <section class="relative h-screen overflow-hidden">
   <video
+    id="hero-video"
     class="absolute inset-0 h-full w-full object-cover"
-    src="/videos/hero.mp4"
     autoplay
     muted
     loop
     playsinline
+    preload="metadata"
+    aria-hidden="true"
   ></video>
 
-  <div class="absolute inset-0 bg-linear-to-b from-oscuro/70 via-verde-bosque/50 to-transparent"></div>
+  <div class="absolute inset-0 bg-linear-to-b from-oscuro/70 via-oscuro/40 to-transparent"></div>
 
   <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
     <span class="mb-4 animate-fade-in text-sm font-medium uppercase tracking-widest text-ambar-claro">
@@ -62,3 +64,18 @@ import Button from '@/components/ui/Button.astro';
     <ChevronDown size={32} />
   </a>
 </section>
+
+<script is:inline>
+  (function () {
+    var video = document.getElementById('hero-video');
+    if (!video) return;
+    var isWide = window.matchMedia('(min-width: 640px)').matches;
+    var src = isWide ? '/videos/hero-horizontal.mp4' : '/videos/hero-vertical.mp4';
+    var poster = isWide
+      ? '/images/home/hero-horizontal-poster.jpg'
+      : '/images/home/hero-vertical-poster.jpg';
+    video.poster = poster;
+    video.src = src;
+    video.load();
+  })();
+</script>

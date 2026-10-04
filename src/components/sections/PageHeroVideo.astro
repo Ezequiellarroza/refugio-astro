@@ -1,0 +1,68 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  videoHorizontal: string;
+  videoVertical: string;
+  posterHorizontal: string;
+  posterVertical: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  videoHorizontal,
+  videoVertical,
+  posterHorizontal,
+  posterVertical,
+} = Astro.props;
+---
+
+<section class="relative flex min-h-[70vh] items-center justify-center overflow-hidden">
+  <video
+    id="page-hero-video"
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-hidden="true"
+  ></video>
+
+  <div class="absolute inset-0 bg-linear-to-b from-oscuro/70 via-oscuro/40 to-transparent"></div>
+
+  <div class="relative z-10 mx-auto max-w-4xl px-6 text-center">
+    {eyebrow && (
+      <span class="mb-6 inline-block rounded-full border border-ambar/30 bg-ambar/20 px-4 py-1 text-sm font-medium uppercase tracking-widest text-ambar-claro">
+        {eyebrow}
+      </span>
+    )}
+    <h1 class="mb-6 font-display text-5xl font-bold leading-tight text-white md:text-7xl">
+      {title}
+    </h1>
+    {subtitle && (
+      <p class="mx-auto max-w-2xl text-xl text-white/75 md:text-2xl">
+        {subtitle}
+      </p>
+    )}
+  </div>
+</section>
+
+<script
+  is:inline
+  define:vars={{ videoHorizontal, videoVertical, posterHorizontal, posterVertical }}
+>
+  (function () {
+    var video = document.getElementById('page-hero-video');
+    if (!video) return;
+    var isWide = window.matchMedia('(min-width: 640px)').matches;
+    var src = isWide ? videoHorizontal : videoVertical;
+    var poster = isWide ? posterHorizontal : posterVertical;
+    video.poster = poster;
+    video.src = src;
+    video.load();
+  })();
+</script>

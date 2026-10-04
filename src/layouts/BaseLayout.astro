@@ -31,6 +31,7 @@ import SEO from '@/components/seo/SEO.astro';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer.astro';
 import WhatsAppButton from '@/components/layout/WhatsAppButton.astro';
+import AccesibilidadButton from '@/components/layout/AccesibilidadButton.astro';
 import '@/styles/global.css';
 
 interface Props {
@@ -69,6 +70,7 @@ const pathname = Astro.url.pathname;
 
     <Footer />
     <WhatsAppButton />
+    <AccesibilidadButton />
 
     <script>
       import '@/scripts/scroll-reveal';

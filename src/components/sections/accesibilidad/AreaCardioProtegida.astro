@@ -1,0 +1,63 @@
+---
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import { HeartPulse, ShieldCheck, Users, FileText } from 'lucide-react';
+
+const recursos = [
+  {
+    icon: HeartPulse,
+    titulo: 'Desfibrilador Externo Automático (DEA)',
+    descripcion: 'Equipamiento médico disponible en el predio para atender emergencias cardíacas.',
+  },
+  {
+    icon: ShieldCheck,
+    titulo: 'Botiquín de primeros auxilios',
+    descripcion: 'Insumos médicos completos para responder rápidamente ante cualquier situación.',
+  },
+  {
+    icon: Users,
+    titulo: 'Personal capacitado',
+    descripcion: 'Nuestro equipo está entrenado para actuar con seguridad ante una emergencia.',
+  },
+  {
+    icon: FileText,
+    titulo: 'Protocolo de actuación',
+    descripcion: 'Procedimientos definidos para garantizar una respuesta coordinada y efectiva.',
+  },
+];
+---
+
+<section id="cardio-protegida" class="scroll-mt-24 bg-verde-bosque py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <SectionTitle
+      subtitle="Más allá de la accesibilidad"
+      title="Área Cardio Protegida"
+      align="center"
+      light
+    />
+
+    <p class="reveal mx-auto mt-8 max-w-2xl text-center leading-relaxed text-white/75">
+      Refugio del Valle es un área cardio protegida: contamos con los recursos necesarios para atender una emergencia cardíaca y responder con rapidez ante cualquier situación.
+    </p>
+
+    <div class="mx-auto mt-16 grid max-w-4xl gap-6 md:grid-cols-2">
+      {recursos.map((recurso, i) => {
+        const Icon = recurso.icon;
+        return (
+          <div class:list={[
+            'reveal',
+            `stagger-${i + 1}`,
+            'rounded-2xl border border-white/10 bg-white/5 p-8 transition-colors duration-300 hover:bg-white/10'
+          ]}>
+            <Icon className="mb-5 h-9 w-9 text-ambar" />
+            <h3 class="mb-2 font-display text-lg font-semibold text-white">
+              {recurso.titulo}
+            </h3>
+            <p class="text-sm leading-relaxed text-white/65">
+              {recurso.descripcion}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

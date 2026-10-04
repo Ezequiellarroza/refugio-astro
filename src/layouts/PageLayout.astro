@@ -1,30 +1,57 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import PageHero from '@/components/sections/PageHero.astro';
+import PageHeroVideo from '@/components/sections/PageHeroVideo.astro';
 import type { SEOProps } from '@/types/seo';
+
+type HeroProps =
+  | {
+      type: 'image';
+      eyebrow?: string;
+      title: string;
+      subtitle?: string;
+      backgroundImage: string;
+      backgroundAlt: string;
+    }
+  | {
+      type: 'video';
+      eyebrow?: string;
+      title: string;
+      subtitle?: string;
+      videoHorizontal: string;
+      videoVertical: string;
+      posterHorizontal: string;
+      posterVertical: string;
+    };
 
 interface Props {
   seo: SEOProps;
-  hero: {
-    eyebrow?: string;
-    title: string;
-    subtitle?: string;
-    backgroundImage: string;
-    backgroundAlt: string;
-  };
+  hero: HeroProps;
 }
 
 const { seo, hero } = Astro.props;
 ---
 
 <BaseLayout seo={seo}>
-  <PageHero
-    eyebrow={hero.eyebrow}
-    title={hero.title}
-    subtitle={hero.subtitle}
-    backgroundImage={hero.backgroundImage}
-    backgroundAlt={hero.backgroundAlt}
-  />
+  {hero.type === 'image' ? (
+    <PageHero
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      subtitle={hero.subtitle}
+      backgroundImage={hero.backgroundImage}
+      backgroundAlt={hero.backgroundAlt}
+    />
+  ) : (
+    <PageHeroVideo
+      eyebrow={hero.eyebrow}
+      title={hero.title}
+      subtitle={hero.subtitle}
+      videoHorizontal={hero.videoHorizontal}
+      videoVertical={hero.videoVertical}
+      posterHorizontal={hero.posterHorizontal}
+      posterVertical={hero.posterVertical}
+    />
+  )}
   <main>
     <slot />
   </main>

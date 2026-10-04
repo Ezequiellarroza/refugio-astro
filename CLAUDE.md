@@ -70,13 +70,15 @@ Documento de referencia para Claude Code. Consultar antes de cada acción no tri
 src/
 ├── components/
 │   ├── ui/              (Button, etc.)
-│   ├── layout/          (Navbar, Footer, WhatsAppButton)
+│   ├── layout/          (Navbar, Footer, WhatsAppButton, AccesibilidadButton)
 │   ├── sections/        (secciones del home y otras páginas)
+│   │   ├── accesibilidad/   (Introduccion, NormasCumplidas, AreaCardioProtegida)
+│   │   └── parque-aereo/    (Introduccion, Stats, ExperienciaUnica, ...)
 │   └── seo/             (SEO.astro, SchemaJsonLd.astro)
 ├── layouts/
 │   ├── BaseLayout.astro
 │   └── PageLayout.astro
-├── pages/               (rutas)
+├── pages/               (rutas: home, actividades, contacto, el-lugar, english-camp, faq, instituciones, nosotros, parque-aereo, accesibilidad)
 ├── styles/
 │   └── global.css       (tokens, animaciones, reset — copia del index.css del React)
 └── types/
@@ -87,9 +89,15 @@ public/
 ├── favicon.svg
 ├── robots.txt           (a crear)
 ├── .htaccess            (a crear, con redirects 301 desde URLs viejas de WP)
+├── videos/
+│   ├── hero-horizontal.mp4
+│   └── hero-vertical.mp4
 └── images/
 ├── og/
 ├── 404/
+├── home/
+│   ├── hero-horizontal-poster.jpg
+│   └── hero-vertical-poster.jpg
 ├── nosotros/
 ├── el-lugar/
 └── actividades/
@@ -134,3 +142,61 @@ public/
 - **No tocar el WordPress vivo** ni el repo React anterior. Son referencias intactas.
 - **No usar self-hosting de fuentes** por ahora. Google Fonts vía `@import`.
 - **No usar paths relativos largos** (`../../../`). Siempre alias `@/`.
+- **No usar clases de Tailwind v4 poco comunes sin verificar que se generan.** Tailwind v4 es estricto con el escaneo: si una clase como `p-7`, `gap-9` o `mt-13` no aparece literalmente en ningún archivo del proyecto, **no se genera** y no aplica nada. Usar la escala estándar (`p-6`, `p-8`, `p-10`, etc.) o clases que ya estén en uso en otros componentes del proyecto.
+
+## 11. Hero del home — patrón de video
+
+### 11.1 Estructura
+
+- **Dos videos por orientación:**
+  - `public/videos/hero-horizontal.mp4` → tablet/desktop (≥640px)
+  - `public/videos/hero-vertical.mp4` → mobile (<640px)
+- **Posters obligatorios:**
+  - `public/images/home/hero-horizontal-poster.jpg`
+  - `public/images/home/hero-vertical-poster.jpg`
+- Los posters son el primer frame del video correspondiente, para que la transición poster → video sea invisible.
+
+### 11.2 Carga condicional
+
+- Un solo `<video>` en el DOM, sin `src` ni `poster` en el HTML.
+- Un script inline (con `is:inline`) detecta el viewport vía `matchMedia('(min-width: 640px)')` y setea `video.src` y `video.poster` según corresponda.
+- Después de setear el `src`, llama a `video.load()`.
+- Esto evita que el navegador descargue ambos videos simultáneamente (problema del approach anterior con dos `<video>` ocultos por CSS).
+
+### 11.3 Atributos del video
+
+- `autoplay muted loop playsinline`
+- `preload="metadata"` (no descarga el video entero hasta estar listo para reproducir)
+- `aria-hidden="true"` (es decorativo)
+
+### 11.4 Overlay
+
+- Gradient: `from-oscuro/70 via-oscuro/40 to-transparent`.
+- **No usar `via-verde-bosque/...`**: tiñe el video y compite con el verde natural del paisaje. Decisión tomada con el cliente.
+
+### 11.5 Compresión de los videos
+
+- Todos los videos del sitio (hero del home, hero de parque-aéreo, videos de contenido) se comprimen con **HandBrake** antes de subir.
+- Parámetros de referencia: **RF 22-24**, preset **Slower**, codec **H.264 High@4.1**, **Optimizar para Web**, **sin audio** (los videos son decorativos y van `muted`).
+- Para videos verticales: en HandBrake, pestaña **Dimensions** → "Límite de resolución" en `Ninguno` (sino te recorta el video vertical a cuadrado). Verificar que "Dimensiones finales" muestre el aspect ratio correcto antes de exportar.
+- Apuntar a **10-15 MB por video de hero** y **15-25 MB por video de contenido**. Si baja la calidad notablemente, priorizar la calidad y aceptar más peso.
+- Para videos de contenido largos (>30s), evaluar **recortar la duración** antes que seguir bajando bitrate — un video más corto pesa menos y rinde mejor en web.
+
+## 12. Página El Lugar — recorridos virtuales
+
+### 12.1 Tours embebidos
+
+La sección "Recorridos virtuales" muestra tres iframes apilados verticalmente, en este orden:
+1. **espacios360.com.ar/refugio** — recorrido general del predio (preexistente)
+2. **Matterport — Salón Refugio del Valle** (`m=ihoNSUqdSBn`)
+3. **Matterport — Edificio Mirador** (`m=rHh24wBEsM5`)
+
+### 12.2 Atributos de los iframes
+
+- Los iframes de Matterport llevan `loading="lazy"` para no penalizar la carga inicial de la página.
+- Atributos: `allow="xr-spatial-tracking; fullscreen"`, `allowfullscreen`, `height="520"`, `width="100%"`.
+
+### 12.3 Decisión pendiente
+
+- Hoy los tres tours están embebidos directos, por pedido del cliente para ver el resultado rápido.
+- **Patrón recomendado a futuro (a discutir con cliente):** imagen previa + botón "Iniciar tour 3D" + modal a pantalla completa. Esto evita cargar ~15-45 MB de assets 3D en la página El Lugar.

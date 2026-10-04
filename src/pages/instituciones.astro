@@ -1,0 +1,103 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { colegios } from '@/data/colegios';
+import type { SEOProps } from '@/types/seo';
+
+const seo: SEOProps = {
+  title: 'Instituciones | Refugio del Valle Tandil',
+  description: 'Más de 120 colegios y clubes de todo el país ya vivieron Refugio del Valle. Conocé la comunidad educativa que confía en nosotros.',
+};
+
+const hero = {
+  type: 'image' as const,
+  eyebrow: 'Comunidad educativa',
+  title: 'Las instituciones que confían en nosotros',
+  subtitle: 'Más de 120 colegios y clubes ya vivieron Refugio del Valle.',
+  backgroundImage: '/images/actividades/hero-actividades.jpg',
+  backgroundAlt: 'Comunidad educativa de Refugio del Valle',
+};
+---
+
+<PageLayout seo={seo} hero={hero}>
+  <section class="bg-crema py-20 md:py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <!-- Buscador -->
+      <div class="reveal mx-auto max-w-xl">
+        <label for="buscador-instituciones" class="sr-only">Buscar institución</label>
+        <input
+          type="text"
+          id="buscador-instituciones"
+          placeholder="Buscar institución"
+          class="w-full rounded-full border border-piedra bg-white px-6 py-4 text-base text-oscuro-suave shadow-sm transition focus:border-verde-sierra focus:outline-none focus:ring-2 focus:ring-verde-sierra/30 md:text-lg"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Grilla -->
+      <div
+        id="grilla-instituciones"
+        class="mt-16 grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-6 md:gap-8 lg:grid-cols-8"
+      >
+        {
+          colegios.map((colegio) => (
+            <div
+              class="institucion-item reveal flex flex-col items-center text-center"
+              data-nombre={colegio.nombre.toLowerCase()}
+            >
+              <img
+                src={`/images/colegios/${colegio.archivo}`}
+                alt={colegio.nombre}
+                style="width: 96px; height: 96px; object-fit: contain; display: block;"
+                loading="lazy"
+              />
+              <p class="mt-3 text-xs font-medium leading-tight text-oscuro-suave md:text-sm">
+                {colegio.nombre}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Estado vacío -->
+      <div
+        id="sin-resultados"
+        class="hidden mt-16 text-center"
+      >
+        <p class="text-lg text-oscuro-suave/70">
+          No encontramos instituciones que coincidan con tu búsqueda.
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  const input = document.getElementById('buscador-instituciones') as HTMLInputElement | null;
+  const grilla = document.getElementById('grilla-instituciones');
+  const sinResultados = document.getElementById('sin-resultados');
+
+  if (input && grilla && sinResultados) {
+    const items = Array.from(grilla.querySelectorAll<HTMLElement>('.institucion-item'));
+
+    const normalizar = (texto: string) =>
+      texto
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(new RegExp('[\\u0300-\\u036f]', 'g'), '');
+
+    input.addEventListener('input', () => {
+      const query = normalizar(input.value.trim());
+      let visibles = 0;
+
+      items.forEach((item) => {
+        const nombre = normalizar(item.dataset.nombre || '');
+        const matches = nombre.includes(query);
+        item.style.display = matches ? '' : 'none';
+        if (matches) visibles++;
+      });
+
+      sinResultados.classList.toggle('hidden', visibles > 0 || query === '');
+      grilla.classList.toggle('hidden', visibles === 0 && query !== '');
+    });
+  }
+</script>
